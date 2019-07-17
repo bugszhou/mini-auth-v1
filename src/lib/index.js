@@ -5,7 +5,9 @@ export const MODULE_NAME = 'mini-auth-v1';
 
 let auth = null;
 
-export function creatMiniAuth({ appid, env, url, appKey, appSecret } = { env: 'weapp' }) {
+export function creatMiniAuth({
+  appid, env, url, appKey, appSecret,
+} = { env: 'weapp' }) {
   if (auth) {
     return auth;
   }
@@ -50,10 +52,9 @@ export function creatMiniAuth({ appid, env, url, appKey, appSecret } = { env: 'w
 }
 
 export function getToken(opts = {}) {
-  let maxRetry = 3;
+  const maxRetry = 3;
 
   return new Promise((resolve, reject) => {
-    selfGetToken(0);
     function selfGetToken(retry) {
       auth
         .getToken(opts)
@@ -61,13 +62,17 @@ export function getToken(opts = {}) {
           resolve(res);
         })
         .catch(err => {
-          if (retry >= maxRetry) {
-            return reject(err);
-          }
           if (err.errCode === 5001 || err.errCode === 5002) {
-            selfGetToken(retry + 1);
+            if (retry >= maxRetry) {
+              reject(err);
+            } else {
+              selfGetToken(retry + 1);
+            }
+          } else {
+            reject(err);
           }
         });
     }
+    selfGetToken(0);
   });
-};
+}
