@@ -1,4 +1,19 @@
 ## mini-auth-v1
 ----------------------------
-author: bugszhou | Email:bugszhou@outlook.com <br>
-description: A lib project with ziu
+
+### [使用文档](./docs/usual.md)
+
+### 功能
+
+- 1. 请求超时或者接口不可用时，自动重试3次，每隔2s重试1次
+- 2. 自动缓存数据6800s
+
+### 缓存数据格式
+
+```javascript
+{
+    data: {}, //服务端返回的data数据
+    expires: 6800000, // 缓存时间
+    expirationTime: 1563373560744 // 过期时间
+}
+```

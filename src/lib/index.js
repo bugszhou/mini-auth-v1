@@ -66,7 +66,9 @@ export function getToken(opts = {}) {
             if (retry >= maxRetry) {
               reject(err);
             } else {
-              selfGetToken(retry + 1);
+              setTimeout(() => {
+                selfGetToken(retry + 1);
+              }, 2000);
             }
           } else {
             reject(err);
