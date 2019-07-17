@@ -5,6 +5,11 @@
     "author": "bugszhou | Email:bugszhou@outlook.com",
     "main": "index.js",
     "module": "dist/mini-auth-v1.esm.js",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/bugszhou/mini-auth-v1"
+    },
+    "homepage": "https://github.com/bugszhou/mini-auth-v1#readme",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "npm run build:esm & npm run build:es5",
