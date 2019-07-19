@@ -24,14 +24,26 @@ export function creatMiniAuth({
   auth.use('token', (ctx, next) => {
     const { jsCode } = ctx.tokenReqData;
     if (jsCode) {
-      ctx.tokenReqData = {
-        js_code: jsCode,
-        sign: defaultSign({
+      if (typeof wx !== 'undefined' && wx) {
+        ctx.tokenReqData = {
           js_code: jsCode,
+          sign: defaultSign({
+            js_code: jsCode,
+            app_key: appKey,
+          }, [appSecret]),
           app_key: appKey,
-        }, [appSecret]),
-        app_key: appKey,
-      };
+        };
+      }
+      if (typeof my !== 'undefined' && my) {
+        ctx.tokenReqData = {
+          auth_code: jsCode,
+          sign: defaultSign({
+            auth_code: jsCode,
+            client_code: appKey,
+          }, [appSecret]),
+          client_code: appKey,
+        };
+      }
     }
     next();
   });
