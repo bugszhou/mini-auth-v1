@@ -39,9 +39,9 @@ export function creatMiniAuth({
           auth_code: jsCode,
           sign: defaultSign({
             auth_code: jsCode,
-            client_code: appKey,
+            app_key: appKey,
           }, [appSecret]),
-          client_code: appKey,
+          app_key: appKey,
         };
       }
     }
