@@ -20,7 +20,7 @@ creatMiniAuth({
     url: '<url>',
     appKey: '<appKey>',
     appSecret: '<appSecret>',
-    env: '<env>',
+    env: '<env>', // env取值范围：[weapp, aliapp, ttapp, swan]
 })
 ```
 
