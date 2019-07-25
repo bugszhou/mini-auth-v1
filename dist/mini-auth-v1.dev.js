@@ -7515,7 +7515,7 @@
 
   function checkOpts$1(){var opts=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{};return propTypes.checkPropTypes({timeout:propTypes.number,scopes:propTypes.array,force:propTypes.bool},opts)}
 
-  var defaultConfig = {timeout:2e4,scopes:"auth_base",force:!0};
+  var defaultConfig = {timeout:2e4,scopes:["auth_base"],force:!0};
 
   function weappLogin(){var _ref=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{timeout:2e4},timeout=_ref.timeout;return new promise$1$1(function(resolve,reject){wx.login({timeout:timeout,success:function success(res){resolve({errCode:0,errMsg:"",jsCode:res.code});},fail:function fail(err){reject({errCode:5e3,errMsg:err.errMsg||stringify$1(err),jsCode:""});}});})}
 
