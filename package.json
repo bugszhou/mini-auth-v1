@@ -27,7 +27,7 @@
         "@babel/runtime": "^7.5.4",
         "@babel/runtime-corejs2": "^7.5.4",
         "miniapp-auth": "^1.0.9",
-        "mksign": "^1.1.5"
+        "mksign": "^1.1.9"
     },
     "devDependencies": {
         "@babel/core": "^7.5.4",
