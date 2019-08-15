@@ -6,7 +6,7 @@ export const MODULE_NAME = 'mini-auth-v1';
 let auth = null;
 
 export function creatMiniAuth({
-  appid, env, url, appKey, appSecret,
+  appid, env, url, appKey, appSecret, headers,
 } = { env: 'weapp' }) {
   if (auth) {
     return auth;
@@ -15,6 +15,7 @@ export function creatMiniAuth({
   auth = miniAuth.create({
     appid,
     env,
+    headers,
     tokenReqConfig: {
       url,
       method: 'POST',
