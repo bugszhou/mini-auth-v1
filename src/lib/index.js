@@ -15,10 +15,10 @@ export function creatMiniAuth({
   auth = miniAuth.create({
     appid,
     env,
-    headers,
     tokenReqConfig: {
       url,
       method: 'POST',
+      headers,
     },
   });
 
