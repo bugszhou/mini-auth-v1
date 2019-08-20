@@ -6,7 +6,7 @@ export const MODULE_NAME = 'mini-auth-v1';
 let auth = null;
 
 export function creatMiniAuth({
-  appid, env, url, appKey, appSecret, headers,
+  appid, env, url, appKey, appCode, headers,
 } = { env: 'weapp' }) {
   if (auth) {
     return auth;
@@ -31,7 +31,7 @@ export function creatMiniAuth({
           sign: defaultSign({
             js_code: jsCode,
             app_key: appKey,
-          }, [appSecret]),
+          }, [appCode]),
           app_key: appKey,
         };
       }
@@ -41,7 +41,7 @@ export function creatMiniAuth({
           sign: defaultSign({
             auth_code: jsCode,
             app_key: appKey,
-          }, [appSecret]),
+          }, [appCode]),
           app_key: appKey,
         };
       }
