@@ -1,6 +1,6 @@
 {
     "name": "mini-auth-v1",
-    "version": "3.1.0",
+    "version": "3.0.3",
     "description": "A lib project with ziu",
     "author": "bugszhou | Email:bugszhou@outlook.com",
     "main": "index.js",
