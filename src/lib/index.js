@@ -1,3 +1,4 @@
+import Promise from 'promise';
 import { miniAuth } from 'miniapp-auth';
 import { defaultSign } from 'mksign';
 
