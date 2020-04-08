@@ -40,6 +40,7 @@ export function creatMiniAuth(
           auth_code: jsCode,
         };
       }
+      tokenReqConfig.headers["Authorization-AppKey"] = appKey;
       tokenReqConfig.headers["Authorization-Sign"] = sha256()
         .update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`)
         .digest("hex");
