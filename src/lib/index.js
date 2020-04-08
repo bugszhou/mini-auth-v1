@@ -1,6 +1,6 @@
 import Promise from 'promise';
 import { miniAuth } from 'miniapp-auth';
-import { defaultSign } from 'mksign';
+import sha256 from 'hash.js/lib/hash/sha/256';
 
 export const MODULE_NAME = 'mini-auth-v1';
 
@@ -26,23 +26,16 @@ export function creatMiniAuth({
   auth.use('token', (ctx, next) => {
     const { jsCode } = ctx.tokenReqData;
     if (jsCode) {
+      ctx.setTokenReqConfig('Authorization-Sign', sha256().update(`${appKey}${JSON.stringify(jsCode)}${appCode}`).digest('hex'));
       if (typeof wx !== 'undefined' && wx) {
         ctx.tokenReqData = {
           js_code: jsCode,
-          sign: defaultSign({
-            js_code: jsCode,
-            app_key: appKey,
-          }, [appCode]),
           app_key: appKey,
         };
       }
       if (typeof my !== 'undefined' && my) {
         ctx.tokenReqData = {
           auth_code: jsCode,
-          sign: defaultSign({
-            auth_code: jsCode,
-            app_key: appKey,
-          }, [appCode]),
           app_key: appKey,
         };
       }

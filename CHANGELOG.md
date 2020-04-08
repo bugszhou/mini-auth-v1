@@ -1,3 +1,12 @@
+# [4.0.0](https://github.com/bugszhou/mini-auth-v1/compare/v3.0.4...v4.0.0) (2020-04-08)
+
+
+### Features
+
+* 增加可修改headers ([2c969dd](https://github.com/bugszhou/mini-auth-v1/commit/2c969dd8daa7b769ca42679c2598efd3ed472b71))
+
+
+
 <a name="3.0.4"></a>
 ## [3.0.4](https://github.com/bugszhou/mini-auth-v1/compare/v3.0.3...v3.0.4) (2019-09-12)
 

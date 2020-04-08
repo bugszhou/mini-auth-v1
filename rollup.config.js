@@ -7,7 +7,7 @@ import builtins from '@joseph184/rollup-plugin-node-builtins';
 import { terser } from "rollup-plugin-terser";
 
 export default {
-  external: ['mksign', 'miniapp-auth', 'promise'],
+  external: ['hash.js', 'miniapp-auth', 'promise'],
   input: 'src/entry/index.js',
   output: [
     // umd，第三方依赖未打包
