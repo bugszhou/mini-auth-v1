@@ -1,3 +1,12 @@
+## [4.0.6](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.5...v4.0.6) (2020-04-08)
+
+
+### Bug Fixes
+
+* 增加headers不存在判断 ([118c477](https://github.com/bugszhou/mini-auth-v1/commit/118c4779c32d449cf255abbeb262ad27d25e06fb))
+
+
+
 ## [4.0.5](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.3...v4.0.5) (2020-04-08)
 
 
