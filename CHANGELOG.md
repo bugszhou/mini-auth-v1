@@ -1,3 +1,12 @@
+## [4.0.3](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.2...v4.0.3) (2020-04-08)
+
+
+### Bug Fixes
+
+* Retcode修改为codecode ([f73539b](https://github.com/bugszhou/mini-auth-v1/commit/f73539bbd26d41a185930b28406cebfa90c6ae66))
+
+
+
 ## [4.0.2](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.1...v4.0.2) (2020-04-08)
 
 
