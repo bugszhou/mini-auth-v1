@@ -7,7 +7,9 @@ export const MODULE_NAME = "mini-auth-v1";
 let auth = null;
 
 export function creatMiniAuth(
-  { appid, env, url, appKey, appCode, headers } = { env: "weapp" },
+  {
+    appid, env, url, appKey, appCode, headers,
+  } = { env: "weapp" },
 ) {
   if (auth) {
     return auth;
