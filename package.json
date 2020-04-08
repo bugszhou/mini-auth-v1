@@ -19,8 +19,9 @@
         "fix": "npm run lint -- --fix",
         "husky": "node node_modules/husky/lib/installer/bin install",
         "unhusky": "node node_modules/husky/lib/installer/bin uninstall",
-        "postversion": "ziu cl -p angular -i CHANGELOG.md -s -r 1000 && git add CHANGELOG.md package.json && git add -u",
-        "commit": "ziu commit",
+        "cl": "conventional-changelog -p angular -i CHANGELOG.md -s -r 1000",
+        "postversion": "conventional-changelog -p angular -i CHANGELOG.md -s -r 2 && git add CHANGELOG.md package.json && git add -u",
+        "commit": "git-cz",
         "prepublishOnly": "npm run build"
     },
     "dependencies": {
@@ -43,19 +44,20 @@
         "babel-eslint": "^10.0.2",
         "babel-preset-minify": "^0.5.0",
         "commitlint": "^8.0.0",
+        "conventional-changelog-cli": "^2.0.31",
         "eslint": "^6.0.1",
         "eslint-config-airbnb": "^17.1.1",
         "eslint-plugin-import": "^2.18.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.14.2",
+        "git-cz": "^3.3.0",
         "husky": "^3.0.0",
         "rollup": "^1.16.7",
         "rollup-plugin-babel": "^4.3.3",
         "rollup-plugin-commonjs": "^10.0.1",
         "rollup-plugin-json": "^4.0.0",
         "rollup-plugin-node-resolve": "^5.2.0",
-        "rollup-plugin-terser": "^5.1.1",
-        "ziu": "^1.6.2"
+        "rollup-plugin-terser": "^5.3.0"
     },
     "license": "MIT",
     "browserslist": [
