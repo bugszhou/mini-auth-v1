@@ -13,32 +13,33 @@ export function creatMiniAuth({
     return auth;
   }
 
+  const tokenReqConfig = {
+    url,
+    method: 'POST',
+    headers,
+  };
+
   auth = miniAuth.create({
     appid,
     env,
-    tokenReqConfig: {
-      url,
-      method: 'POST',
-      headers,
-    },
+    tokenReqConfig,
   });
 
   auth.use('token', (ctx, next) => {
     const { jsCode } = ctx.tokenReqData;
     if (jsCode) {
-      ctx.setTokenReqConfig('Authorization-Sign', sha256().update(`${appKey}${JSON.stringify(jsCode)}${appCode}`).digest('hex'));
       if (typeof wx !== 'undefined' && wx) {
         ctx.tokenReqData = {
           js_code: jsCode,
-          app_key: appKey,
         };
       }
       if (typeof my !== 'undefined' && my) {
         ctx.tokenReqData = {
           auth_code: jsCode,
-          app_key: appKey,
         };
       }
+      tokenReqConfig.headers['Authorization-Sign'] = sha256().update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`).digest('hex');
+      auth.setTokenReqConfig('headers', tokenReqConfig.headers);
     }
     next();
   });
