@@ -1,3 +1,12 @@
+## [4.0.1](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.0...v4.0.1) (2020-04-08)
+
+
+### Features
+
+* 修改签名方式 ([f81a969](https://github.com/bugszhou/mini-auth-v1/commit/f81a969ffff334301a704796b1be6d40e158066d))
+
+
+
 # [4.0.0](https://github.com/bugszhou/mini-auth-v1/compare/v3.0.4...v4.0.0) (2020-04-08)
 
 
