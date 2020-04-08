@@ -1,21 +1,21 @@
-import Promise from 'promise';
-import { miniAuth } from 'miniapp-auth';
-import sha256 from 'hash.js/lib/hash/sha/256';
+import Promise from "promise";
+import { miniAuth } from "miniapp-auth";
+import sha256 from "hash.js/lib/hash/sha/256";
 
-export const MODULE_NAME = 'mini-auth-v1';
+export const MODULE_NAME = "mini-auth-v1";
 
 let auth = null;
 
-export function creatMiniAuth({
-  appid, env, url, appKey, appCode, headers,
-} = { env: 'weapp' }) {
+export function creatMiniAuth(
+  { appid, env, url, appKey, appCode, headers } = { env: "weapp" },
+) {
   if (auth) {
     return auth;
   }
 
   const tokenReqConfig = {
     url,
-    method: 'POST',
+    method: "POST",
     headers,
   };
 
@@ -25,32 +25,39 @@ export function creatMiniAuth({
     tokenReqConfig,
   });
 
-  auth.use('token', (ctx, next) => {
+  auth.use("token", (ctx, next) => {
     const { jsCode } = ctx.tokenReqData;
     if (jsCode) {
-      if (typeof wx !== 'undefined' && wx) {
+      if (typeof wx !== "undefined" && wx) {
         ctx.tokenReqData = {
           js_code: jsCode,
         };
       }
-      if (typeof my !== 'undefined' && my) {
+      if (typeof my !== "undefined" && my) {
         ctx.tokenReqData = {
           auth_code: jsCode,
         };
       }
-      tokenReqConfig.headers['Authorization-Sign'] = sha256().update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`).digest('hex');
-      auth.setTokenReqConfig('headers', tokenReqConfig.headers);
+      tokenReqConfig.headers["Authorization-Sign"] = sha256()
+        .update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`)
+        .digest("hex");
+      auth.setTokenReqConfig("headers", tokenReqConfig.headers);
     }
     next();
   });
-  auth.use('afterToken', (ctx, next) => {
-    const { data = {}, retcode, msg } = ctx.tokenResData.data;
-    if (retcode === 200) {
+  auth.use("afterToken", (ctx, next) => {
+    const {
+      data = {},
+      retcode,
+      msg,
+      code,
+    } = ctx.tokenResData.data;
+    if (retcode === 200 || code === 200) {
       ctx.tokenResData = data;
       return next();
     }
     return next({
-      retcode,
+      retcode: retcode || code,
       msg,
       data,
     });
@@ -66,10 +73,10 @@ export function getToken(opts = {}) {
     function selfGetToken(retry) {
       auth
         .getToken(opts)
-        .then(res => {
+        .then((res) => {
           resolve(res);
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.errCode === 5001 || err.errCode === 5002) {
             if (retry >= maxRetry) {
               reject(err);
