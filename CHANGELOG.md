@@ -1,3 +1,12 @@
+## [4.0.5](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.3...v4.0.5) (2020-04-08)
+
+
+### Features
+
+* 增加Authorization-AppKey ([9d301a0](https://github.com/bugszhou/mini-auth-v1/commit/9d301a0fcafc760fdda495efc7a6ed68a7af3590))
+
+
+
 ## [4.0.3](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.2...v4.0.3) (2020-04-08)
 
 
