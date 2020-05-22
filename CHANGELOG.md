@@ -1,3 +1,7 @@
+## [4.0.7](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.6...v4.0.7) (2020-05-22)
+
+
+
 ## [4.0.6](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.5...v4.0.6) (2020-04-08)
 
 
