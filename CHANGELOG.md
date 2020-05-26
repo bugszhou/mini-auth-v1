@@ -1,3 +1,12 @@
+# [4.1.0](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.7...v4.1.0) (2020-05-26)
+
+
+### Features
+
+* 升级auth包 ([c7924c7](https://github.com/bugszhou/mini-auth-v1/commit/c7924c730de348a1a8b0f8ac3c1dc0aa6fe73110))
+
+
+
 ## [4.0.7](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.6...v4.0.7) (2020-05-22)
 
 
