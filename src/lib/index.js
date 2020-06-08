@@ -7,6 +7,7 @@ export const MODULE_NAME = "mini-auth-v1";
 let auth = null;
 
 export function creatMiniAuth(
+  // eslint-disable-next-line object-curly-newline
   { appid, env, url, appKey, appCode, headers } = { env: "weapp" },
 ) {
   if (auth) {
