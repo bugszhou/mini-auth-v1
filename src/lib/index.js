@@ -7,9 +7,7 @@ export const MODULE_NAME = "mini-auth-v1";
 let auth = null;
 
 export function creatMiniAuth(
-  {
-    appid, env, url, appKey, appCode, headers,
-  } = { env: "weapp" },
+  { appid, env, url, appKey, appCode, headers } = { env: "weapp" },
 ) {
   if (auth) {
     return auth;
@@ -52,19 +50,27 @@ export function creatMiniAuth(
     next();
   });
   auth.use("afterToken", (ctx, next) => {
-    const {
-      data = {},
-      retcode,
-      msg,
-      code,
-    } = ctx.tokenResData.data;
+    // eslint-disable-next-line object-curly-newline
+    const { data = {}, retcode, msg, code } = ctx.tokenResData.data;
     if (retcode === 200 || code === 200) {
       ctx.tokenResData = data;
       return next();
     }
+    let headersObj = {};
+    let statusCode = 50000;
+    let errMsg = "UNKOWN";
+    try {
+      headersObj = ctx.tokenResData.headers;
+      statusCode = ctx.tokenResData.status;
+      errMsg = msg || ctx.tokenResData.data;
+    } catch (e) {
+      console.error(e);
+    }
     return next({
+      headers: headersObj,
+      status: statusCode,
       retcode: retcode || code,
-      msg,
+      msg: errMsg,
       data,
     });
   });
