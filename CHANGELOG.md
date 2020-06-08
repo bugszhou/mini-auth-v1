@@ -1,3 +1,12 @@
+# [4.2.0](https://github.com/bugszhou/mini-auth-v1/compare/v4.1.0...v4.2.0) (2020-06-08)
+
+
+### Features
+
+* 增加返回错误信息 ([a490026](https://github.com/bugszhou/mini-auth-v1/commit/a490026a52b233d15b6d97b999ed628f826187f0))
+
+
+
 # [4.1.0](https://github.com/bugszhou/mini-auth-v1/compare/v4.0.7...v4.1.0) (2020-05-26)
 
 
