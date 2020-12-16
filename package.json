@@ -5,6 +5,7 @@
     "author": "bugszhou | Email:bugszhou@outlook.com",
     "main": "index.js",
     "module": "dist/mini-auth-v1.esm.js",
+    "types": "typings/index.d.ts",
     "repository": {
         "type": "git",
         "url": "https://github.com/bugszhou/mini-auth-v1"
