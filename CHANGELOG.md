@@ -1,3 +1,12 @@
+## [4.2.3](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.2...v4.2.3) (2020-12-21)
+
+
+### Features
+
+* 增加注释 ([7d19583](https://github.com/bugszhou/mini-auth-v1/commit/7d195835c7c8630c3677054ba5c82c2391ba8694))
+
+
+
 ## [4.2.2](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.1...v4.2.2) (2020-12-21)
 
 
