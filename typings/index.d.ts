@@ -50,6 +50,13 @@ interface IMiniAuthOptions {
 }
 
 interface IMiniAuthGetTokenOptions {
+  /**
+   * 是否强制刷新，默认值为false
+   * 
+   * true - 先删除缓存数据，然后重新获取js-code，请求服务端获取最新数据
+   * 
+   * false - 从缓存获取数据，如果缓存中的数据过期了，将执行值为true的步骤
+   */
   isRefresh: boolean;
 }
 
