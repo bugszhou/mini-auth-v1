@@ -1,7 +1,21 @@
-declare class MiniAuth<ID> {
+declare class MiniAuth<IData extends {}> {
   constructor(options?: IMiniAuthOptions);
   on: (eventName: string, evtData: Record<string, any>) => void;
-  private getTokenReturn: ID;
+  /**
+   * 缓存有效时间
+   * @param number - 毫秒
+   */
+  setTokenExpires(number): void;
+  /**
+   * 获取缓存data中的数据
+   * @param key - 固定值"token"
+   */
+  getDataFromStorage(key: "token"): IGetTokenReturn<IData>;
+  /**
+   * 更新缓存data的值
+   * @param key - 固定值"token"
+   */
+  set2Storage(key: "token", data: IData): void;
 }
 
 interface IMiniAuthOptions {
@@ -56,6 +70,6 @@ interface IGetTokenReturn<IReturnData> {
 }
 
 declare module "mini-auth-v1" {
-  export function creatMiniAuth<ID>(options: IMiniAuthOptions): MiniAuth<ID>;
+  export function creatMiniAuth<IReturnData>(options: IMiniAuthOptions): MiniAuth<IReturnData>;
   export const getToken: <IReturnData>(opts?: IMiniAuthGetTokenOptions) => Promise<IGetTokenReturn<IReturnData>>;
 }
