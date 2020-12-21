@@ -1,3 +1,12 @@
+## [4.2.2](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.1...v4.2.2) (2020-12-21)
+
+
+### Bug Fixes
+
+* 修改typings ([bda58c5](https://github.com/bugszhou/mini-auth-v1/commit/bda58c5abeac1d1d177cfe13a25dbcf70056ada6))
+
+
+
 ## [4.2.1](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.0...v4.2.1) (2020-12-16)
 
 
