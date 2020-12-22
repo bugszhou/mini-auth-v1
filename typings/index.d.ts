@@ -14,8 +14,14 @@ declare class MiniAuth<IData extends {}> {
   /**
    * 更新缓存data的值
    * @param key - 固定值"token"
+   * @param data - any;缓存数据
    */
   set2Storage(key: "token", data: IData): void;
+  /**
+   * 获取Token数据，遇到网络问题不会重试
+   * @param opts - object
+   */
+  getToken: <IReturnData>(opts?: IMiniAuthGetTokenOptions) => Promise<IGetTokenReturn<IReturnData>>
 }
 
 interface IMiniAuthOptions {
@@ -78,5 +84,9 @@ interface IGetTokenReturn<IReturnData> {
 
 declare module "mini-auth-v1" {
   export function creatMiniAuth<IReturnData>(options: IMiniAuthOptions): MiniAuth<IReturnData>;
+  /**
+   * 获取Token数据，遇到网络问题请求失败，会重试3次
+   * @param opts - object
+   */
   export const getToken: <IReturnData>(opts?: IMiniAuthGetTokenOptions) => Promise<IGetTokenReturn<IReturnData>>;
 }
