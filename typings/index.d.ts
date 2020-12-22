@@ -21,7 +21,7 @@ declare class MiniAuth<IData extends {}> {
    * 获取Token数据，遇到网络问题不会重试
    * @param opts - object
    */
-  getToken: <IReturnData>(opts?: IMiniAuthGetTokenOptions) => Promise<IGetTokenReturn<IReturnData>>
+  getToken(opts?: IMiniAuthGetTokenOptions): Promise<IGetTokenReturn<IData>>;
 }
 
 interface IMiniAuthOptions {
