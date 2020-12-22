@@ -1,3 +1,12 @@
+## [4.2.5](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.4...v4.2.5) (2020-12-22)
+
+
+### Bug Fixes
+
+* Bug：getToken return typings error ([a2990f1](https://github.com/bugszhou/mini-auth-v1/commit/a2990f1e05dd08111c41e4d6be0890a66689b7a2))
+
+
+
 ## [4.2.4](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.3...v4.2.4) (2020-12-22)
 
 
