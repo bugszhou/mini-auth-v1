@@ -1,3 +1,12 @@
+## [4.2.6](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.5...v4.2.6) (2021-02-24)
+
+
+### Bug Fixes
+
+* Modify typings ([9e56020](https://github.com/bugszhou/mini-auth-v1/commit/9e56020ab2c0f493cc4c620ae8147c0f16af4f03))
+
+
+
 ## [4.2.5](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.4...v4.2.5) (2020-12-22)
 
 
