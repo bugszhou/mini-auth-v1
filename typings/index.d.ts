@@ -3,9 +3,9 @@ declare class MiniAuth<IData extends {}> {
   on: (eventName: string, evtData: Record<string, any>) => void;
   /**
    * 缓存有效时间
-   * @param number - 毫秒
+   * @param time - 毫秒
    */
-  setTokenExpires(number): void;
+  setTokenExpires(time: number): void;
   /**
    * 获取缓存data中的数据
    * @param key - 固定值"token"
