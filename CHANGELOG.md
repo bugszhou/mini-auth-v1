@@ -1,3 +1,12 @@
+## [4.2.7](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.6...v4.2.7) (2021-07-06)
+
+
+### Features
+
+* 增加参数类型 ([1c3e358](https://github.com/bugszhou/mini-auth-v1/commit/1c3e358d116d0bd14bfd2b27101b9a2f4bd302b2))
+
+
+
 ## [4.2.6](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.5...v4.2.6) (2021-02-24)
 
 
