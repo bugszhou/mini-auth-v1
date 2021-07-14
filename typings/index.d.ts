@@ -26,7 +26,7 @@ declare class MiniAuth<IData extends {}> {
 
 interface IMiniAuthOptions {
   /**
-   * 小程序appid
+   * 小程序appid，仅用于区分storage的key，不做具体业务逻辑
    */
   appid: string;
   /**
