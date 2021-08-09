@@ -1,15 +1,15 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
   typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = global || self, (function () {
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, (function () {
     var current = global['mini-auth-v1'];
     var exports = global['mini-auth-v1'] = {};
     factory(exports);
     exports.noConflict = function () { global['mini-auth-v1'] = current; return exports; };
   }()));
-}(this, function (exports) { 'use strict';
+}(this, (function (exports) { 'use strict';
 
-  var domain;
+  var domain$1;
 
   // This constructor is used to store event handlers. Instantiating this is
   // faster than explicitly calling `Object.create(null)` to get a "clean" empty
@@ -39,7 +39,7 @@
     this.domain = null;
     if (EventEmitter.usingDomains) {
       // if there is an active domain, then attach to it.
-      if (domain.active && !(this instanceof domain.Domain)) ;
+      if (domain$1.active ) ;
     }
 
     if (!this._events || this._events === Object.getPrototypeOf(this)._events) {
@@ -475,9 +475,9 @@
     return ret;
   }
 
-  var inherits;
+  var inherits$2;
   if (typeof Object.create === 'function'){
-    inherits = function inherits(ctor, superCtor) {
+    inherits$2 = function inherits(ctor, superCtor) {
       // implementation from standard node.js 'util' module
       ctor.super_ = superCtor;
       ctor.prototype = Object.create(superCtor.prototype, {
@@ -490,7 +490,7 @@
       });
     };
   } else {
-    inherits = function inherits(ctor, superCtor) {
+    inherits$2 = function inherits(ctor, superCtor) {
       ctor.super_ = superCtor;
       var TempCtor = function () {};
       TempCtor.prototype = superCtor.prototype;
@@ -498,7 +498,7 @@
       ctor.prototype.constructor = ctor;
     };
   }
-  var inherits$1 = inherits;
+  var inherits$3 = inherits$2;
 
   /*
   <!-- LICENSEFILE/ -->
@@ -525,7 +525,7 @@
 
   <!-- /LICENSEFILE -->
   */
-  inherits$1(Domain, EventEmitter);
+  inherits$3(Domain, EventEmitter);
   function createEmitError(d) {
     return emitError;
     function emitError(e) {
@@ -590,13 +590,13 @@
   }
   var create = createDomain;
 
-  var require$$0 = {
+  var require$$0$1 = {
     Domain: Domain,
     createDomain: createDomain,
     create: create
   };
 
-  var domain$1; // The domain module is executed on demand
+  var domain; // The domain module is executed on demand
   var hasSetImmediate = typeof setImmediate === "function";
 
   // Use the fastest means possible to execute a task in its own turn, with
@@ -671,12 +671,12 @@
       // To execute code outside of any domain, the following dance is necessary.
       var parentDomain = process.domain;
       if (parentDomain) {
-          if (!domain$1) {
+          if (!domain) {
               // Lazy execute the domain module.
               // Only employed if the user elects to use domains.
-              domain$1 = require$$0;
+              domain = require$$0$1;
           }
-          domain$1.active = process.domain = null;
+          domain.active = process.domain = null;
       }
 
       // `setImmediate` is slower that `process.nextTick`, but `process.nextTick`
@@ -692,7 +692,7 @@
       }
 
       if (parentDomain) {
-          domain$1.active = process.domain = parentDomain;
+          domain.active = process.domain = parentDomain;
       }
   }
 
@@ -743,9 +743,9 @@
     }
   }
 
-  var core = Promise;
+  var core = Promise$1;
 
-  function Promise(fn) {
+  function Promise$1(fn) {
     if (typeof this !== 'object') {
       throw new TypeError('Promises must be constructed via new');
     }
@@ -759,22 +759,22 @@
     if (fn === noop) return;
     doResolve(fn, this);
   }
-  Promise._l = null;
-  Promise._m = null;
-  Promise._n = noop;
+  Promise$1._l = null;
+  Promise$1._m = null;
+  Promise$1._n = noop;
 
-  Promise.prototype.then = function(onFulfilled, onRejected) {
-    if (this.constructor !== Promise) {
+  Promise$1.prototype.then = function(onFulfilled, onRejected) {
+    if (this.constructor !== Promise$1) {
       return safeThen(this, onFulfilled, onRejected);
     }
-    var res = new Promise(noop);
+    var res = new Promise$1(noop);
     handle(this, new Handler(onFulfilled, onRejected, res));
     return res;
   };
 
   function safeThen(self, onFulfilled, onRejected) {
     return new self.constructor(function (resolve, reject) {
-      var res = new Promise(noop);
+      var res = new Promise$1(noop);
       res.then(resolve, reject);
       handle(self, new Handler(onFulfilled, onRejected, res));
     });
@@ -783,8 +783,8 @@
     while (self._i === 3) {
       self = self._j;
     }
-    if (Promise._l) {
-      Promise._l(self);
+    if (Promise$1._l) {
+      Promise$1._l(self);
     }
     if (self._i === 0) {
       if (self._h === 0) {
@@ -840,7 +840,7 @@
       }
       if (
         then === self.then &&
-        newValue instanceof Promise
+        newValue instanceof Promise$1
       ) {
         self._i = 3;
         self._j = newValue;
@@ -859,8 +859,8 @@
   function reject(self, newValue) {
     self._i = 2;
     self._j = newValue;
-    if (Promise._m) {
-      Promise._m(self, newValue);
+    if (Promise$1._m) {
+      Promise$1._m(self, newValue);
     }
     finale(self);
   }
@@ -1276,11 +1276,11 @@
   	return x && x.__esModule && Object.prototype.hasOwnProperty.call(x, 'default') ? x['default'] : x;
   }
 
-  function createCommonjsModule(fn, module) {
+  function createCommonjsModule$1(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
-  var reactIs_production_min = createCommonjsModule(function (module, exports) {
+  var reactIs_production_min = createCommonjsModule$1(function (module, exports) {
   Object.defineProperty(exports,"__esModule",{value:!0});
   var b="function"===typeof Symbol&&Symbol.for,c=b?Symbol.for("react.element"):60103,d=b?Symbol.for("react.portal"):60106,e=b?Symbol.for("react.fragment"):60107,f=b?Symbol.for("react.strict_mode"):60108,g=b?Symbol.for("react.profiler"):60114,h=b?Symbol.for("react.provider"):60109,k=b?Symbol.for("react.context"):60110,l=b?Symbol.for("react.async_mode"):60111,m=b?Symbol.for("react.concurrent_mode"):60111,n=b?Symbol.for("react.forward_ref"):60112,p=b?Symbol.for("react.suspense"):60113,q=b?Symbol.for("react.memo"):
   60115,r=b?Symbol.for("react.lazy"):60116;function t(a){if("object"===typeof a&&null!==a){var u=a.$$typeof;switch(u){case c:switch(a=a.type,a){case l:case m:case e:case g:case f:case p:return a;default:switch(a=a&&a.$$typeof,a){case k:case n:case h:return a;default:return u}}case r:case q:case d:return u}}}function v(a){return t(a)===m}exports.typeOf=t;exports.AsyncMode=l;exports.ConcurrentMode=m;exports.ContextConsumer=k;exports.ContextProvider=h;exports.Element=c;exports.ForwardRef=n;
@@ -1290,36 +1290,36 @@
   });
 
   unwrapExports(reactIs_production_min);
-  var reactIs_production_min_1 = reactIs_production_min.typeOf;
-  var reactIs_production_min_2 = reactIs_production_min.AsyncMode;
-  var reactIs_production_min_3 = reactIs_production_min.ConcurrentMode;
-  var reactIs_production_min_4 = reactIs_production_min.ContextConsumer;
-  var reactIs_production_min_5 = reactIs_production_min.ContextProvider;
-  var reactIs_production_min_6 = reactIs_production_min.Element;
-  var reactIs_production_min_7 = reactIs_production_min.ForwardRef;
-  var reactIs_production_min_8 = reactIs_production_min.Fragment;
-  var reactIs_production_min_9 = reactIs_production_min.Lazy;
-  var reactIs_production_min_10 = reactIs_production_min.Memo;
-  var reactIs_production_min_11 = reactIs_production_min.Portal;
-  var reactIs_production_min_12 = reactIs_production_min.Profiler;
-  var reactIs_production_min_13 = reactIs_production_min.StrictMode;
-  var reactIs_production_min_14 = reactIs_production_min.Suspense;
-  var reactIs_production_min_15 = reactIs_production_min.isValidElementType;
-  var reactIs_production_min_16 = reactIs_production_min.isAsyncMode;
-  var reactIs_production_min_17 = reactIs_production_min.isConcurrentMode;
-  var reactIs_production_min_18 = reactIs_production_min.isContextConsumer;
-  var reactIs_production_min_19 = reactIs_production_min.isContextProvider;
-  var reactIs_production_min_20 = reactIs_production_min.isElement;
-  var reactIs_production_min_21 = reactIs_production_min.isForwardRef;
-  var reactIs_production_min_22 = reactIs_production_min.isFragment;
-  var reactIs_production_min_23 = reactIs_production_min.isLazy;
-  var reactIs_production_min_24 = reactIs_production_min.isMemo;
-  var reactIs_production_min_25 = reactIs_production_min.isPortal;
-  var reactIs_production_min_26 = reactIs_production_min.isProfiler;
-  var reactIs_production_min_27 = reactIs_production_min.isStrictMode;
-  var reactIs_production_min_28 = reactIs_production_min.isSuspense;
+  reactIs_production_min.typeOf;
+  reactIs_production_min.AsyncMode;
+  reactIs_production_min.ConcurrentMode;
+  reactIs_production_min.ContextConsumer;
+  reactIs_production_min.ContextProvider;
+  reactIs_production_min.Element;
+  reactIs_production_min.ForwardRef;
+  reactIs_production_min.Fragment;
+  reactIs_production_min.Lazy;
+  reactIs_production_min.Memo;
+  reactIs_production_min.Portal;
+  reactIs_production_min.Profiler;
+  reactIs_production_min.StrictMode;
+  reactIs_production_min.Suspense;
+  reactIs_production_min.isValidElementType;
+  reactIs_production_min.isAsyncMode;
+  reactIs_production_min.isConcurrentMode;
+  reactIs_production_min.isContextConsumer;
+  reactIs_production_min.isContextProvider;
+  reactIs_production_min.isElement;
+  reactIs_production_min.isForwardRef;
+  reactIs_production_min.isFragment;
+  reactIs_production_min.isLazy;
+  reactIs_production_min.isMemo;
+  reactIs_production_min.isPortal;
+  reactIs_production_min.isProfiler;
+  reactIs_production_min.isStrictMode;
+  reactIs_production_min.isSuspense;
 
-  var reactIs_development = createCommonjsModule(function (module, exports) {
+  var reactIs_development = createCommonjsModule$1(function (module, exports) {
 
 
 
@@ -1539,36 +1539,36 @@
   });
 
   unwrapExports(reactIs_development);
-  var reactIs_development_1 = reactIs_development.typeOf;
-  var reactIs_development_2 = reactIs_development.AsyncMode;
-  var reactIs_development_3 = reactIs_development.ConcurrentMode;
-  var reactIs_development_4 = reactIs_development.ContextConsumer;
-  var reactIs_development_5 = reactIs_development.ContextProvider;
-  var reactIs_development_6 = reactIs_development.Element;
-  var reactIs_development_7 = reactIs_development.ForwardRef;
-  var reactIs_development_8 = reactIs_development.Fragment;
-  var reactIs_development_9 = reactIs_development.Lazy;
-  var reactIs_development_10 = reactIs_development.Memo;
-  var reactIs_development_11 = reactIs_development.Portal;
-  var reactIs_development_12 = reactIs_development.Profiler;
-  var reactIs_development_13 = reactIs_development.StrictMode;
-  var reactIs_development_14 = reactIs_development.Suspense;
-  var reactIs_development_15 = reactIs_development.isValidElementType;
-  var reactIs_development_16 = reactIs_development.isAsyncMode;
-  var reactIs_development_17 = reactIs_development.isConcurrentMode;
-  var reactIs_development_18 = reactIs_development.isContextConsumer;
-  var reactIs_development_19 = reactIs_development.isContextProvider;
-  var reactIs_development_20 = reactIs_development.isElement;
-  var reactIs_development_21 = reactIs_development.isForwardRef;
-  var reactIs_development_22 = reactIs_development.isFragment;
-  var reactIs_development_23 = reactIs_development.isLazy;
-  var reactIs_development_24 = reactIs_development.isMemo;
-  var reactIs_development_25 = reactIs_development.isPortal;
-  var reactIs_development_26 = reactIs_development.isProfiler;
-  var reactIs_development_27 = reactIs_development.isStrictMode;
-  var reactIs_development_28 = reactIs_development.isSuspense;
+  reactIs_development.typeOf;
+  reactIs_development.AsyncMode;
+  reactIs_development.ConcurrentMode;
+  reactIs_development.ContextConsumer;
+  reactIs_development.ContextProvider;
+  reactIs_development.Element;
+  reactIs_development.ForwardRef;
+  reactIs_development.Fragment;
+  reactIs_development.Lazy;
+  reactIs_development.Memo;
+  reactIs_development.Portal;
+  reactIs_development.Profiler;
+  reactIs_development.StrictMode;
+  reactIs_development.Suspense;
+  reactIs_development.isValidElementType;
+  reactIs_development.isAsyncMode;
+  reactIs_development.isConcurrentMode;
+  reactIs_development.isContextConsumer;
+  reactIs_development.isContextProvider;
+  reactIs_development.isElement;
+  reactIs_development.isForwardRef;
+  reactIs_development.isFragment;
+  reactIs_development.isLazy;
+  reactIs_development.isMemo;
+  reactIs_development.isPortal;
+  reactIs_development.isProfiler;
+  reactIs_development.isStrictMode;
+  reactIs_development.isSuspense;
 
-  var reactIs = createCommonjsModule(function (module) {
+  var reactIs = createCommonjsModule$1(function (module) {
 
   if (process.env.NODE_ENV === 'production') {
     module.exports = reactIs_production_min;
@@ -1584,7 +1584,7 @@
   */
   /* eslint-disable no-unused-vars */
   var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  var hasOwnProperty$9 = Object.prototype.hasOwnProperty;
   var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
   function toObject(val) {
@@ -1648,7 +1648,7 @@
   		from = Object(arguments[s]);
 
   		for (var key in from) {
-  			if (hasOwnProperty.call(from, key)) {
+  			if (hasOwnProperty$9.call(from, key)) {
   				to[key] = from[key];
   			}
   		}
@@ -1673,18 +1673,18 @@
    * LICENSE file in the root directory of this source tree.
    */
 
-  var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
+  var ReactPropTypesSecret$1 = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
-  var ReactPropTypesSecret_1 = ReactPropTypesSecret;
+  var ReactPropTypesSecret_1 = ReactPropTypesSecret$1;
 
-  var printWarning = function() {};
+  var printWarning$1 = function() {};
 
   if (process.env.NODE_ENV !== 'production') {
-    var ReactPropTypesSecret$1 = ReactPropTypesSecret_1;
+    var ReactPropTypesSecret = ReactPropTypesSecret_1;
     var loggedTypeFailures = {};
-    var has = Function.call.bind(Object.prototype.hasOwnProperty);
+    var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
 
-    printWarning = function(text) {
+    printWarning$1 = function(text) {
       var message = 'Warning: ' + text;
       if (typeof console !== 'undefined') {
         console.error(message);
@@ -1712,7 +1712,7 @@
   function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
     if (process.env.NODE_ENV !== 'production') {
       for (var typeSpecName in typeSpecs) {
-        if (has(typeSpecs, typeSpecName)) {
+        if (has$1(typeSpecs, typeSpecName)) {
           var error;
           // Prop type validation may throw. In case they do, we don't want to
           // fail the render phase where it didn't fail before. So we log it.
@@ -1728,12 +1728,12 @@
               err.name = 'Invariant Violation';
               throw err;
             }
-            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret$1);
+            error = typeSpecs[typeSpecName](values, typeSpecName, componentName, location, null, ReactPropTypesSecret);
           } catch (ex) {
             error = ex;
           }
           if (error && !(error instanceof Error)) {
-            printWarning(
+            printWarning$1(
               (componentName || 'React class') + ': type specification of ' +
               location + ' `' + typeSpecName + '` is invalid; the type checker ' +
               'function must return `null` or an `Error` but returned a ' + typeof error + '. ' +
@@ -1749,7 +1749,7 @@
 
             var stack = getStack ? getStack() : '';
 
-            printWarning(
+            printWarning$1(
               'Failed ' + location + ' type: ' + error.message + (stack != null ? stack : '')
             );
           }
@@ -1771,11 +1771,11 @@
 
   var checkPropTypes_1 = checkPropTypes;
 
-  var has$1 = Function.call.bind(Object.prototype.hasOwnProperty);
-  var printWarning$1 = function() {};
+  var has = Function.call.bind(Object.prototype.hasOwnProperty);
+  var printWarning = function() {};
 
   if (process.env.NODE_ENV !== 'production') {
-    printWarning$1 = function(text) {
+    printWarning = function(text) {
       var message = 'Warning: ' + text;
       if (typeof console !== 'undefined') {
         console.error(message);
@@ -1951,7 +1951,7 @@
               // Avoid spamming the console because they are often not actionable except for lib authors
               manualPropTypeWarningCount < 3
             ) {
-              printWarning$1(
+              printWarning(
                 'You are manually calling a React.PropTypes validation ' +
                 'function for the `' + propFullName + '` prop on `' + componentName  + '`. This is deprecated ' +
                 'and will throw in the standalone `prop-types` package. ' +
@@ -2064,12 +2064,12 @@
       if (!Array.isArray(expectedValues)) {
         if (process.env.NODE_ENV !== 'production') {
           if (arguments.length > 1) {
-            printWarning$1(
+            printWarning(
               'Invalid arguments supplied to oneOf, expected an array, got ' + arguments.length + ' arguments. ' +
               'A common mistake is to write oneOf(x, y, z) instead of oneOf([x, y, z]).'
             );
           } else {
-            printWarning$1('Invalid argument supplied to oneOf, expected an array.');
+            printWarning('Invalid argument supplied to oneOf, expected an array.');
           }
         }
         return emptyFunctionThatReturnsNull;
@@ -2106,7 +2106,7 @@
           return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
         }
         for (var key in propValue) {
-          if (has$1(propValue, key)) {
+          if (has(propValue, key)) {
             var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret_1);
             if (error instanceof Error) {
               return error;
@@ -2120,14 +2120,14 @@
 
     function createUnionTypeChecker(arrayOfTypeCheckers) {
       if (!Array.isArray(arrayOfTypeCheckers)) {
-        process.env.NODE_ENV !== 'production' ? printWarning$1('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+        process.env.NODE_ENV !== 'production' ? printWarning('Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
         return emptyFunctionThatReturnsNull;
       }
 
       for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
         var checker = arrayOfTypeCheckers[i];
         if (typeof checker !== 'function') {
-          printWarning$1(
+          printWarning(
             'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
             'received ' + getPostfixForTypeWarning(checker) + ' at index ' + i + '.'
           );
@@ -2400,7 +2400,7 @@
     return ReactPropTypes;
   };
 
-  var propTypes = createCommonjsModule(function (module) {
+  var propTypes = createCommonjsModule$1(function (module) {
   /**
    * Copyright (c) 2013-present, Facebook, Inc.
    *
@@ -2678,7 +2678,7 @@
 
   var commonjsGlobal = typeof globalThis !== 'undefined' ? globalThis : typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
-  function createCommonjsModule$1(fn, module) {
+  function createCommonjsModule(fn, module) {
   	return module = { exports: {} }, fn(module, module.exports), module.exports;
   }
 
@@ -2762,11 +2762,11 @@
    * @param {*} value The value to convert.
    * @returns {string} Returns the converted string.
    */
-  function objectToString(value) {
+  function objectToString$1(value) {
     return nativeObjectToString$1.call(value);
   }
 
-  var _objectToString = objectToString;
+  var _objectToString = objectToString$1;
 
   /** `Object#toString` result references. */
   var nullTag = '[object Null]',
@@ -2818,12 +2818,12 @@
    * _.isObject(null);
    * // => false
    */
-  function isObject(value) {
+  function isObject$1(value) {
     var type = typeof value;
     return value != null && (type == 'object' || type == 'function');
   }
 
-  var isObject_1 = isObject;
+  var isObject_1 = isObject$1;
 
   /** `Object#toString` result references. */
   var asyncTag = '[object AsyncFunction]',
@@ -2848,7 +2848,7 @@
    * _.isFunction(/abc/);
    * // => false
    */
-  function isFunction(value) {
+  function isFunction$1(value) {
     if (!isObject_1(value)) {
       return false;
     }
@@ -2858,7 +2858,7 @@
     return tag == funcTag || tag == genTag || tag == asyncTag || tag == proxyTag;
   }
 
-  var isFunction_1 = isFunction;
+  var isFunction_1 = isFunction$1;
 
   /** Used to detect overreaching core-js shims. */
   var coreJsData = _root['__core-js_shared__'];
@@ -3416,7 +3416,7 @@
 
   var _baseFor = baseFor;
 
-  var _cloneBuffer = createCommonjsModule$1(function (module, exports) {
+  var _cloneBuffer = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
   var freeExports =  exports && !exports.nodeType && exports;
 
@@ -3695,9 +3695,9 @@
    * _.isArray(_.noop);
    * // => false
    */
-  var isArray = Array.isArray;
+  var isArray$1 = Array.isArray;
 
-  var isArray_1 = isArray;
+  var isArray_1 = isArray$1;
 
   /** Used as references for various `Number` constants. */
   var MAX_SAFE_INTEGER = 9007199254740991;
@@ -3816,7 +3816,7 @@
 
   var stubFalse_1 = stubFalse;
 
-  var isBuffer_1 = createCommonjsModule$1(function (module, exports) {
+  var isBuffer_1 = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
   var freeExports =  exports && !exports.nodeType && exports;
 
@@ -3985,7 +3985,7 @@
 
   var _baseUnary = baseUnary;
 
-  var _nodeUtil = createCommonjsModule$1(function (module, exports) {
+  var _nodeUtil = createCommonjsModule(function (module, exports) {
   /** Detect free variable `exports`. */
   var freeExports =  exports && !exports.nodeType && exports;
 
@@ -4759,7 +4759,7 @@
 
   var createClass = _createClass;
 
-  var _typeof_1 = createCommonjsModule$1(function (module) {
+  var _typeof_1 = createCommonjsModule(function (module) {
   function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
 
   function _typeof(obj) {
@@ -4799,7 +4799,7 @@
 
   var possibleConstructorReturn = _possibleConstructorReturn;
 
-  var getPrototypeOf = createCommonjsModule$1(function (module) {
+  var getPrototypeOf = createCommonjsModule(function (module) {
   function _getPrototypeOf(o) {
     module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
       return o.__proto__ || Object.getPrototypeOf(o);
@@ -4810,7 +4810,7 @@
   module.exports = _getPrototypeOf;
   });
 
-  var setPrototypeOf = createCommonjsModule$1(function (module) {
+  var setPrototypeOf = createCommonjsModule(function (module) {
   function _setPrototypeOf(o, p) {
     module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
       o.__proto__ = p;
@@ -4838,7 +4838,7 @@
     if (superClass) setPrototypeOf(subClass, superClass);
   }
 
-  var inherits$2 = _inherits;
+  var inherits$1 = _inherits;
 
   function _defineProperty$1(obj, key, value) {
     if (key in obj) {
@@ -4895,7 +4895,7 @@
 
   var classPrivateFieldSet = _classPrivateFieldSet;
 
-  var Base=function(_EventEmitter){function Base(){var _this;return classCallCheck(this,Base),_this=possibleConstructorReturn(this,getPrototypeOf(Base).call(this)),_config.set(assertThisInitialized(_this),{writable:!0,value:{}}),_waitQueues.set(assertThisInitialized(_this),{writable:!0,value:[]}),_tokenMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_userMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_this}return inherits$2(Base,_EventEmitter),createClass(Base,[{key:"config",value:function config(){}},{key:"queue",value:function queue(){}},{key:"use",value:function use(){}},{key:"getToken",value:function getToken(){var _ref=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{isRefresh:!1,withCredentials:!0},isRefresh=_ref.isRefresh,withCredentials=_ref.withCredentials;}},{key:"getUserInfo",value:function getUserInfo(){var _ref2=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{},rawData=_ref2.rawData,signature=_ref2.signature,encryptedData=_ref2.encryptedData,iv=_ref2.iv;}},{key:"addEventListener",value:function addEventListener(){}}]),Base}(EventEmitter),_config=new WeakMap,_waitQueues=new WeakMap,_tokenMiddles=new WeakMap,_userMiddles=new WeakMap;
+  var Base=function(_EventEmitter){function Base(){var _this;return classCallCheck(this,Base),_this=possibleConstructorReturn(this,getPrototypeOf(Base).call(this)),_config.set(assertThisInitialized(_this),{writable:!0,value:{}}),_waitQueues.set(assertThisInitialized(_this),{writable:!0,value:[]}),_tokenMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_userMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_this}return inherits$1(Base,_EventEmitter),createClass(Base,[{key:"config",value:function config(){}},{key:"queue",value:function queue(){}},{key:"use",value:function use(){}},{key:"getToken",value:function getToken(){var _ref=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{isRefresh:!1,withCredentials:!0};_ref.isRefresh;_ref.withCredentials;}},{key:"getUserInfo",value:function getUserInfo(){var _ref2=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};_ref2.rawData;_ref2.signature;_ref2.encryptedData;_ref2.iv;}},{key:"addEventListener",value:function addEventListener(){}}]),Base}(EventEmitter),_config=new WeakMap,_waitQueues=new WeakMap,_tokenMiddles=new WeakMap,_userMiddles=new WeakMap;
 
   var evtNameScope="MINI_AUTH:token:";var TOKEN_BEFORE_REFRESH="".concat(evtNameScope,"beforeRefresh");var TOKEN_AFTER_REFRESH="".concat(evtNameScope,"afterRefresh");var TOKEN_BEFORE_CACHE="".concat(evtNameScope,"beforeCache");var TOKEN_AFTER_CACHE="".concat(evtNameScope,"afterCache");var TOKEN_EXPIRED="".concat(evtNameScope,"expired");var TOKEN_BEFORE_LOGIN="".concat(evtNameScope,"beforeLogin");var TOKEN_AFTER_LOGIN="".concat(evtNameScope,"afterLogin");var TOKEN_BEFORE_REQUEST="".concat(evtNameScope,"beforeRequest");var TOKEN_AFTER_REQUEST="".concat(evtNameScope,"afterRequest");var TOKEN_WX_BEFORE_LOGIN="".concat(evtNameScope,"wx:beforeLogin");var TOKEN_WX_SUCCESS_LOGIN="".concat(evtNameScope,"wx:successLogin");var TOKEN_WX_FAIL_LOGIN="".concat(evtNameScope,"wx:failLogin");var TOKEN_WX_BEFORE_REQUEST="".concat(evtNameScope,"wx:beforeRequest");var TOKEN_WX_SUCCESS_REQUEST="".concat(evtNameScope,"wx:successRequest");var TOKEN_WX_FAIL_REQUEST="".concat(evtNameScope,"wx:failRequest");var TOKEN_ALI_BEFORE_LOGIN="".concat(evtNameScope,"ali:beforeLogin");var TOKEN_ALI_SUCCESS_LOGIN="".concat(evtNameScope,"ali:successLogin");var TOKEN_ALI_FAIL_LOGIN="".concat(evtNameScope,"ali:failLogin");var TOKEN_ALI_BEFORE_REQUEST="".concat(evtNameScope,"ali:beforeRequest");var TOKEN_ALI_SUCCESS_REQUEST="".concat(evtNameScope,"ali:successRequest");var TOKEN_ALI_FAIL_REQUEST="".concat(evtNameScope,"ali:failRequest");
 
@@ -4933,7 +4933,7 @@
 
   function setStorageSync(){var _ref=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{env:"weapp"},env=_ref.env;return function(){var key=0<arguments.length&&arguments[0]!==void 0?arguments[0]:"",data=1<arguments.length&&arguments[1]!==void 0?arguments[1]:"";try{switch(env){case"aliapp":aliapp.setStorageSync({key:key,data:data});break;case"swan":case"ttapp":case"weapp":default:weapp.setStorageSync(key,data);}}catch(e){throw e}}}function getStorageSync(){var _ref2=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{env:"weapp"},env=_ref2.env;return function(){var key=0<arguments.length&&arguments[0]!==void 0?arguments[0]:"",data=null;try{switch(env){case"aliapp":data=aliapp.getStorageSync({key:key}).data;break;case"swan":case"ttapp":case"weapp":default:data=weapp.getStorageSync(key);}}catch(e){throw e}return data}}function removeStorageSync(){var _ref3=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{env:"weapp"},env=_ref3.env;return function(){var key=0<arguments.length&&arguments[0]!==void 0?arguments[0]:"";try{switch(env){case"aliapp":aliapp.removeStorageSync({key:key});break;case"swan":case"ttapp":case"weapp":default:weapp.removeStorageSync(key);}}catch(e){throw e}}}
 
-  function ownKeys$2(object,enumerableOnly){var keys=Object.keys(object);if(Object.getOwnPropertySymbols){var symbols=Object.getOwnPropertySymbols(object);enumerableOnly&&(symbols=symbols.filter(function(sym){return Object.getOwnPropertyDescriptor(object,sym).enumerable})),keys.push.apply(keys,symbols);}return keys}function _objectSpread$2(target){for(var source,i=1;i<arguments.length;i++)source=null==arguments[i]?{}:arguments[i],i%2?ownKeys$2(source,!0).forEach(function(key){defineProperty$1(target,key,source[key]);}):Object.getOwnPropertyDescriptors?Object.defineProperties(target,Object.getOwnPropertyDescriptors(source)):ownKeys$2(source).forEach(function(key){Object.defineProperty(target,key,Object.getOwnPropertyDescriptor(source,key));});return target}function _classPrivateMethodGet(receiver,privateSet,fn){if(!privateSet.has(receiver))throw new TypeError("attempted to get private field on non-instance");return fn}var TOKEN_TYPE="token",AFTER_TOKEN_TYPE="afterToken",USER_TYPE="user",MiniAuth=function(_Base){function MiniAuth(){var _this,config=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};return classCallCheck(this,MiniAuth),_this=possibleConstructorReturn(this,getPrototypeOf(MiniAuth).call(this)),_storageModel.add(assertThisInitialized(_this)),_storageKey.add(assertThisInitialized(_this)),_config$1.set(assertThisInitialized(_this),{writable:!0,value:{}}),_waitQueues$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_tokenMiddles$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_afterMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_userMiddles$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_expires.set(assertThisInitialized(_this),{writable:!0,value:6800*1e3}),_isTokenReq.set(assertThisInitialized(_this),{writable:!0,value:!1}),defineProperty$1(assertThisInitialized(_this),"tokenReqData",{}),defineProperty$1(assertThisInitialized(_this),"tokenResData",{}),_this.middleware=new Middleware,classPrivateFieldSet(assertThisInitialized(_this),_config$1,config),_this}return inherits$2(MiniAuth,_Base),createClass(MiniAuth,[{key:"use",value:function use(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"",middleFn=1<arguments.length&&void 0!==arguments[1]?arguments[1]:function(){};if("function"==typeof middleFn)switch(type){case AFTER_TOKEN_TYPE:classPrivateFieldGet(this,_afterMiddles).push(middleFn);break;case USER_TYPE:classPrivateFieldGet(this,_userMiddles$1).push(middleFn);break;case TOKEN_TYPE:default:classPrivateFieldGet(this,_tokenMiddles$1).push(middleFn);}}},{key:"set2Storage",value:function set2Storage(){function selfSet2Storage(retry){try{setStorageSync({env:classPrivateFieldGet(this,_config$1).env})(storageData.key,storageData.data);}catch(e){console.error(e),0<retry&&selfSet2Storage.call(this,retry-1),this.emit(TOKEN_STORAGE_SET_ERR,{reqDta:storageData,err:e});}return storageData.data}var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE,data=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},storageData=_classPrivateMethodGet(this,_storageModel,_storageModel2).call(this,type,data);return selfSet2Storage.call(this,3)}},{key:"getDataFromStorage",value:function getDataFromStorage(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE,data=null;try{data=getStorageSync({env:classPrivateFieldGet(this,_config$1).env})(_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type));}catch(e){console.error(e),this.emit(TOKEN_STORAGE_GET_ERR,{reqDta:TOKEN_TYPE,err:e});}return data}},{key:"clearStorage",value:function clearStorage(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE;try{removeStorageSync({env:classPrivateFieldGet(this,_config$1).env})(_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type));}catch(e){console.error(e);}}},{key:"isExpired",value:function isExpired(){var data=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};if(data){var expirationTime=data.expirationTime;return !(expirationTime&&expirationTime>Date.now())}return !0}},{key:"setTokenExpires",value:function setTokenExpires(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:0;(!t||isNaN(t))&&(t=1e3*6800),classPrivateFieldSet(this,_expires,+t);}},{key:"runQueues",value:function runQueues(err,data){if(classPrivateFieldGet(this,_waitQueues$1)&&Array.isArray(classPrivateFieldGet(this,_waitQueues$1))){var len=classPrivateFieldGet(this,_waitQueues$1).length;classPrivateFieldGet(this,_waitQueues$1).splice(0,len).forEach(function(_ref){var resolve=_ref.resolve,reject=_ref.reject;return err?reject(err):resolve(data)});}}},{key:"setTokenReqConfig",value:function setTokenReqConfig(key){var val=1<arguments.length&&void 0!==arguments[1]?arguments[1]:"";return null===key||void 0===key?null:void(classPrivateFieldGet(this,_config$1).tokenReqConfig[key]=val)}},{key:"getToken",value:function getToken(){var _this2=this,_ref2=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{isRefresh:!1},isRefresh=_ref2.isRefresh,scopes=_ref2.scopes;return new promise(function(resolve,reject){if(classPrivateFieldGet(_this2,_isTokenReq))return classPrivateFieldGet(_this2,_waitQueues$1).push({resolve:resolve,reject:reject});var env=classPrivateFieldGet(_this2,_config$1).env,tokenReqConfig=classPrivateFieldGet(_this2,_config$1).tokenReqConfig,url=tokenReqConfig.url,headers=tokenReqConfig.headers,method=tokenReqConfig.method,storageData=null;if(isRefresh)_this2.emit(TOKEN_BEFORE_REFRESH),_this2.clearStorage(TOKEN_TYPE),_this2.emit(TOKEN_AFTER_REFRESH);else{if(storageData=_this2.getDataFromStorage(TOKEN_TYPE),_this2.emit(TOKEN_BEFORE_CACHE,storageData),storageData&&!_this2.isExpired(storageData))return resolve(storageData),void _this2.emit(TOKEN_AFTER_CACHE,storageData);_this2.emit(TOKEN_EXPIRED,storageData),_this2.clearStorage(TOKEN_TYPE);}_this2.emit(TOKEN_BEFORE_LOGIN),classPrivateFieldSet(_this2,_isTokenReq,!0),getJsCode({self:_this2,env:env,scopes:scopes}).then(function(res){return _this2.tokenReqData.jsCode=res.jsCode,_this2.emit(TOKEN_AFTER_LOGIN,res),_this2.middleware.dispatch(_this2,classPrivateFieldGet(_this2,_tokenMiddles$1))}).then(function(ctx){return _this2.emit(TOKEN_BEFORE_REQUEST),request({self:_this2,env:env,url:url,method:method,headers:tokenReqConfig.headers||classPrivateFieldGet(_this2,_config$1).headers,data:_objectSpread$2({},ctx.tokenReqData)})}).then(function(res){return _this2.tokenResData=res,_this2.middleware.dispatch(_this2,classPrivateFieldGet(_this2,_afterMiddles))}).then(function(ctx){return _this2.emit(TOKEN_AFTER_REQUEST,ctx.tokenResData),_this2.set2Storage(TOKEN_TYPE,ctx.tokenResData)}).then(function(resData){resolve(resData),_this2.runQueues(null,resData),classPrivateFieldSet(_this2,_isTokenReq,!1),classPrivateFieldSet(_this2,_waitQueues$1,[]);})["catch"](function(err){reject(err),_this2.runQueues(err),classPrivateFieldSet(_this2,_isTokenReq,!1),classPrivateFieldSet(_this2,_waitQueues$1,[]);});})}},{key:"config",get:function get(){return classPrivateFieldGet(this,_config$1)}},{key:"queue",get:function get(){return this.waitQueues}}]),MiniAuth}(Base),_config$1=new WeakMap,_waitQueues$1=new WeakMap,_tokenMiddles$1=new WeakMap,_afterMiddles=new WeakMap,_userMiddles$1=new WeakMap,_expires=new WeakMap,_isTokenReq=new WeakMap,_storageKey=new WeakSet,_storageModel=new WeakSet,_storageKey2=function(){var type=0<arguments.length&&arguments[0]!==void 0?arguments[0]:TOKEN_TYPE;return "MINI_AUTH:".concat(type,":").concat(classPrivateFieldGet(this,_config$1).appid)},_storageModel2=function(){var type=0<arguments.length&&arguments[0]!==void 0?arguments[0]:TOKEN_TYPE,data=1<arguments.length&&arguments[1]!==void 0?arguments[1]:{};return {key:_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type),data:{data:data,expires:classPrivateFieldGet(this,_expires),expirationTime:Date.now()+classPrivateFieldGet(this,_expires)}}};
+  function ownKeys$2(object,enumerableOnly){var keys=Object.keys(object);if(Object.getOwnPropertySymbols){var symbols=Object.getOwnPropertySymbols(object);enumerableOnly&&(symbols=symbols.filter(function(sym){return Object.getOwnPropertyDescriptor(object,sym).enumerable})),keys.push.apply(keys,symbols);}return keys}function _objectSpread$2(target){for(var source,i=1;i<arguments.length;i++)source=null==arguments[i]?{}:arguments[i],i%2?ownKeys$2(source,!0).forEach(function(key){defineProperty$1(target,key,source[key]);}):Object.getOwnPropertyDescriptors?Object.defineProperties(target,Object.getOwnPropertyDescriptors(source)):ownKeys$2(source).forEach(function(key){Object.defineProperty(target,key,Object.getOwnPropertyDescriptor(source,key));});return target}function _classPrivateMethodGet(receiver,privateSet,fn){if(!privateSet.has(receiver))throw new TypeError("attempted to get private field on non-instance");return fn}var TOKEN_TYPE="token",AFTER_TOKEN_TYPE="afterToken",USER_TYPE="user",MiniAuth=function(_Base){function MiniAuth(){var _this,config=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};return classCallCheck(this,MiniAuth),_this=possibleConstructorReturn(this,getPrototypeOf(MiniAuth).call(this)),_storageModel.add(assertThisInitialized(_this)),_storageKey.add(assertThisInitialized(_this)),_config$1.set(assertThisInitialized(_this),{writable:!0,value:{}}),_waitQueues$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_tokenMiddles$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_afterMiddles.set(assertThisInitialized(_this),{writable:!0,value:[]}),_userMiddles$1.set(assertThisInitialized(_this),{writable:!0,value:[]}),_expires.set(assertThisInitialized(_this),{writable:!0,value:6800*1e3}),_isTokenReq.set(assertThisInitialized(_this),{writable:!0,value:!1}),defineProperty$1(assertThisInitialized(_this),"tokenReqData",{}),defineProperty$1(assertThisInitialized(_this),"tokenResData",{}),_this.middleware=new Middleware,classPrivateFieldSet(assertThisInitialized(_this),_config$1,config),_this}return inherits$1(MiniAuth,_Base),createClass(MiniAuth,[{key:"use",value:function use(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:"",middleFn=1<arguments.length&&void 0!==arguments[1]?arguments[1]:function(){};if("function"==typeof middleFn)switch(type){case AFTER_TOKEN_TYPE:classPrivateFieldGet(this,_afterMiddles).push(middleFn);break;case USER_TYPE:classPrivateFieldGet(this,_userMiddles$1).push(middleFn);break;case TOKEN_TYPE:default:classPrivateFieldGet(this,_tokenMiddles$1).push(middleFn);}}},{key:"set2Storage",value:function set2Storage(){function selfSet2Storage(retry){try{setStorageSync({env:classPrivateFieldGet(this,_config$1).env})(storageData.key,storageData.data);}catch(e){console.error(e),0<retry&&selfSet2Storage.call(this,retry-1),this.emit(TOKEN_STORAGE_SET_ERR,{reqDta:storageData,err:e});}return storageData.data}var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE,data=1<arguments.length&&void 0!==arguments[1]?arguments[1]:{},storageData=_classPrivateMethodGet(this,_storageModel,_storageModel2).call(this,type,data);return selfSet2Storage.call(this,3)}},{key:"getDataFromStorage",value:function getDataFromStorage(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE,data=null;try{data=getStorageSync({env:classPrivateFieldGet(this,_config$1).env})(_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type));}catch(e){console.error(e),this.emit(TOKEN_STORAGE_GET_ERR,{reqDta:TOKEN_TYPE,err:e});}return data}},{key:"clearStorage",value:function clearStorage(){var type=0<arguments.length&&void 0!==arguments[0]?arguments[0]:TOKEN_TYPE;try{removeStorageSync({env:classPrivateFieldGet(this,_config$1).env})(_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type));}catch(e){console.error(e);}}},{key:"isExpired",value:function isExpired(){var data=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{};if(data){var expirationTime=data.expirationTime;return !(expirationTime&&expirationTime>Date.now())}return !0}},{key:"setTokenExpires",value:function setTokenExpires(){var t=0<arguments.length&&void 0!==arguments[0]?arguments[0]:0;(!t||isNaN(t))&&(t=1e3*6800),classPrivateFieldSet(this,_expires,+t);}},{key:"runQueues",value:function runQueues(err,data){if(classPrivateFieldGet(this,_waitQueues$1)&&Array.isArray(classPrivateFieldGet(this,_waitQueues$1))){var len=classPrivateFieldGet(this,_waitQueues$1).length;classPrivateFieldGet(this,_waitQueues$1).splice(0,len).forEach(function(_ref){var resolve=_ref.resolve,reject=_ref.reject;return err?reject(err):resolve(data)});}}},{key:"setTokenReqConfig",value:function setTokenReqConfig(key){var val=1<arguments.length&&void 0!==arguments[1]?arguments[1]:"";return null===key||void 0===key?null:void(classPrivateFieldGet(this,_config$1).tokenReqConfig[key]=val)}},{key:"getToken",value:function getToken(){var _this2=this,_ref2=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{isRefresh:!1},isRefresh=_ref2.isRefresh,scopes=_ref2.scopes;return new promise(function(resolve,reject){if(classPrivateFieldGet(_this2,_isTokenReq))return classPrivateFieldGet(_this2,_waitQueues$1).push({resolve:resolve,reject:reject});var env=classPrivateFieldGet(_this2,_config$1).env,tokenReqConfig=classPrivateFieldGet(_this2,_config$1).tokenReqConfig,url=tokenReqConfig.url;tokenReqConfig.headers;var method=tokenReqConfig.method,storageData=null;if(isRefresh)_this2.emit(TOKEN_BEFORE_REFRESH),_this2.clearStorage(TOKEN_TYPE),_this2.emit(TOKEN_AFTER_REFRESH);else {if(storageData=_this2.getDataFromStorage(TOKEN_TYPE),_this2.emit(TOKEN_BEFORE_CACHE,storageData),storageData&&!_this2.isExpired(storageData))return resolve(storageData),void _this2.emit(TOKEN_AFTER_CACHE,storageData);_this2.emit(TOKEN_EXPIRED,storageData),_this2.clearStorage(TOKEN_TYPE);}_this2.emit(TOKEN_BEFORE_LOGIN),classPrivateFieldSet(_this2,_isTokenReq,!0),getJsCode({self:_this2,env:env,scopes:scopes}).then(function(res){return _this2.tokenReqData.jsCode=res.jsCode,_this2.emit(TOKEN_AFTER_LOGIN,res),_this2.middleware.dispatch(_this2,classPrivateFieldGet(_this2,_tokenMiddles$1))}).then(function(ctx){return _this2.emit(TOKEN_BEFORE_REQUEST),request({self:_this2,env:env,url:url,method:method,headers:tokenReqConfig.headers||classPrivateFieldGet(_this2,_config$1).headers,data:_objectSpread$2({},ctx.tokenReqData)})}).then(function(res){return _this2.tokenResData=res,_this2.middleware.dispatch(_this2,classPrivateFieldGet(_this2,_afterMiddles))}).then(function(ctx){return _this2.emit(TOKEN_AFTER_REQUEST,ctx.tokenResData),_this2.set2Storage(TOKEN_TYPE,ctx.tokenResData)}).then(function(resData){resolve(resData),_this2.runQueues(null,resData),classPrivateFieldSet(_this2,_isTokenReq,!1),classPrivateFieldSet(_this2,_waitQueues$1,[]);})["catch"](function(err){reject(err),_this2.runQueues(err),classPrivateFieldSet(_this2,_isTokenReq,!1),classPrivateFieldSet(_this2,_waitQueues$1,[]);});})}},{key:"config",get:function get(){return classPrivateFieldGet(this,_config$1)}},{key:"queue",get:function get(){return this.waitQueues}}]),MiniAuth}(Base),_config$1=new WeakMap,_waitQueues$1=new WeakMap,_tokenMiddles$1=new WeakMap,_afterMiddles=new WeakMap,_userMiddles$1=new WeakMap,_expires=new WeakMap,_isTokenReq=new WeakMap,_storageKey=new WeakSet,_storageModel=new WeakSet,_storageKey2=function(){var type=0<arguments.length&&arguments[0]!==void 0?arguments[0]:TOKEN_TYPE;return "MINI_AUTH:".concat(type,":").concat(classPrivateFieldGet(this,_config$1).appid)},_storageModel2=function(){var type=0<arguments.length&&arguments[0]!==void 0?arguments[0]:TOKEN_TYPE,data=1<arguments.length&&arguments[1]!==void 0?arguments[1]:{};return {key:_classPrivateMethodGet(this,_storageKey,_storageKey2).call(this,type),data:{data:data,expires:classPrivateFieldGet(this,_expires),expirationTime:Date.now()+classPrivateFieldGet(this,_expires)}}};
 
   var defaultConfig$2={withCredentials:!1,env:"weapp",appid:"mockAppid",tokenReqConfig:{url:"",method:"GET",headers:{"content-type":"application/json"},timeout:1e4},userInfoReqConfig:{url:"",method:"GET",headers:{"content-type":"application/json"},timeout:1e4}};
 
@@ -4952,13 +4952,10 @@
   };
 
   // shim for using process in browser
-  if (typeof global.setTimeout === 'function') ;
-  if (typeof global.clearTimeout === 'function') ;
 
   // from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
   var performance = global.performance || {};
-  var performanceNow =
-    performance.now        ||
+  performance.now        ||
     performance.mozNow     ||
     performance.msNow      ||
     performance.oNow       ||
@@ -4996,7 +4993,7 @@
       }
     });
     for (var x = args[i]; i < len; x = args[++i]) {
-      if (isNull(x) || !isObject$1(x)) {
+      if (isNull(x) || !isObject(x)) {
         str += ' ' + x;
       } else {
         str += ' ' + inspect(x);
@@ -5034,7 +5031,7 @@
   var debugEnviron;
   function debuglog(set) {
     if (isUndefined(debugEnviron))
-      debugEnviron =  '';
+      debugEnviron = '';
     set = set.toUpperCase();
     if (!debugs[set]) {
       if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -5147,7 +5144,7 @@
     // Check that value is an object with an inspect function on it
     if (ctx.customInspect &&
         value &&
-        isFunction$1(value.inspect) &&
+        isFunction(value.inspect) &&
         // Filter out the util module, it's inspect function is special
         value.inspect !== inspect &&
         // Also filter out any prototype objects using the circular check.
@@ -5182,7 +5179,7 @@
 
     // Some type of object without properties can be shortcutted.
     if (keys.length === 0) {
-      if (isFunction$1(value)) {
+      if (isFunction(value)) {
         var name = value.name ? ': ' + value.name : '';
         return ctx.stylize('[Function' + name + ']', 'special');
       }
@@ -5200,13 +5197,13 @@
     var base = '', array = false, braces = ['{', '}'];
 
     // Make Array say that they are Array
-    if (isArray$1(value)) {
+    if (isArray(value)) {
       array = true;
       braces = ['[', ']'];
     }
 
     // Make functions say that they are functions
-    if (isFunction$1(value)) {
+    if (isFunction(value)) {
       var n = value.name ? ': ' + value.name : '';
       base = ' [Function' + n + ']';
     }
@@ -5282,7 +5279,7 @@
   function formatArray(ctx, value, recurseTimes, visibleKeys, keys) {
     var output = [];
     for (var i = 0, l = value.length; i < l; ++i) {
-      if (hasOwnProperty$9(value, String(i))) {
+      if (hasOwnProperty(value, String(i))) {
         output.push(formatProperty(ctx, value, recurseTimes, visibleKeys,
             String(i), true));
       } else {
@@ -5313,7 +5310,7 @@
         str = ctx.stylize('[Setter]', 'special');
       }
     }
-    if (!hasOwnProperty$9(visibleKeys, key)) {
+    if (!hasOwnProperty(visibleKeys, key)) {
       name = '[' + key + ']';
     }
     if (!str) {
@@ -5379,7 +5376,7 @@
 
   // NOTE: These type checking functions intentionally don't use `instanceof`
   // because it is fragile and can be easily faked with `Object.create()`.
-  function isArray$1(ar) {
+  function isArray(ar) {
     return Array.isArray(ar);
   }
 
@@ -5412,23 +5409,23 @@
   }
 
   function isRegExp(re) {
-    return isObject$1(re) && objectToString$1(re) === '[object RegExp]';
+    return isObject(re) && objectToString(re) === '[object RegExp]';
   }
 
-  function isObject$1(arg) {
+  function isObject(arg) {
     return typeof arg === 'object' && arg !== null;
   }
 
   function isDate(d) {
-    return isObject$1(d) && objectToString$1(d) === '[object Date]';
+    return isObject(d) && objectToString(d) === '[object Date]';
   }
 
   function isError(e) {
-    return isObject$1(e) &&
-        (objectToString$1(e) === '[object Error]' || e instanceof Error);
+    return isObject(e) &&
+        (objectToString(e) === '[object Error]' || e instanceof Error);
   }
 
-  function isFunction$1(arg) {
+  function isFunction(arg) {
     return typeof arg === 'function';
   }
 
@@ -5445,7 +5442,7 @@
     return Buffer.isBuffer(maybeBuf);
   }
 
-  function objectToString$1(o) {
+  function objectToString(o) {
     return Object.prototype.toString.call(o);
   }
 
@@ -5475,7 +5472,7 @@
 
   function _extend(origin, add) {
     // Don't do anything if add isn't an object
-    if (!add || !isObject$1(add)) return origin;
+    if (!add || !isObject(add)) return origin;
 
     var keys = Object.keys(add);
     var i = keys.length;
@@ -5484,20 +5481,20 @@
     }
     return origin;
   }
-  function hasOwnProperty$9(obj, prop) {
+  function hasOwnProperty(obj, prop) {
     return Object.prototype.hasOwnProperty.call(obj, prop);
   }
 
-  var require$$0$1 = {
-    inherits: inherits$1,
+  var require$$0 = {
+    inherits: inherits$3,
     _extend: _extend,
     log: log,
     isBuffer: isBuffer,
     isPrimitive: isPrimitive,
-    isFunction: isFunction$1,
+    isFunction: isFunction,
     isError: isError,
     isDate: isDate,
-    isObject: isObject$1,
+    isObject: isObject,
     isRegExp: isRegExp,
     isUndefined: isUndefined,
     isSymbol: isSymbol,
@@ -5506,14 +5503,14 @@
     isNullOrUndefined: isNullOrUndefined,
     isNull: isNull,
     isBoolean: isBoolean,
-    isArray: isArray$1,
+    isArray: isArray,
     inspect: inspect,
     deprecate: deprecate,
     format: format,
     debuglog: debuglog
   };
 
-  var inherits_browser = createCommonjsModule(function (module) {
+  var inherits_browser = createCommonjsModule$1(function (module) {
   if (typeof Object.create === 'function') {
     // implementation from standard node.js 'util' module
     module.exports = function inherits(ctor, superCtor) {
@@ -5543,9 +5540,9 @@
   }
   });
 
-  var inherits$3 = createCommonjsModule(function (module) {
+  var inherits = createCommonjsModule$1(function (module) {
   try {
-    var util = require$$0$1;
+    var util = require$$0;
     /* istanbul ignore next */
     if (typeof util.inherits !== 'function') throw '';
     module.exports = util.inherits;
@@ -5555,7 +5552,7 @@
   }
   });
 
-  var inherits_1 = inherits$3;
+  var inherits_1 = inherits;
 
   function isSurrogatePair(msg, i) {
     if ((msg.charCodeAt(i) & 0xFC00) !== 0xD800) {
@@ -5707,35 +5704,35 @@
   }
   var split32_1 = split32;
 
-  function rotr32(w, b) {
+  function rotr32$1(w, b) {
     return (w >>> b) | (w << (32 - b));
   }
-  var rotr32_1 = rotr32;
+  var rotr32_1 = rotr32$1;
 
   function rotl32(w, b) {
     return (w << b) | (w >>> (32 - b));
   }
   var rotl32_1 = rotl32;
 
-  function sum32(a, b) {
+  function sum32$1(a, b) {
     return (a + b) >>> 0;
   }
-  var sum32_1 = sum32;
+  var sum32_1 = sum32$1;
 
   function sum32_3(a, b, c) {
     return (a + b + c) >>> 0;
   }
   var sum32_3_1 = sum32_3;
 
-  function sum32_4(a, b, c, d) {
+  function sum32_4$1(a, b, c, d) {
     return (a + b + c + d) >>> 0;
   }
-  var sum32_4_1 = sum32_4;
+  var sum32_4_1 = sum32_4$1;
 
-  function sum32_5(a, b, c, d, e) {
+  function sum32_5$1(a, b, c, d, e) {
     return (a + b + c + d + e) >>> 0;
   }
-  var sum32_5_1 = sum32_5;
+  var sum32_5_1 = sum32_5$1;
 
   function sum64(buf, pos, ah, al) {
     var bh = buf[pos];
@@ -5858,7 +5855,7 @@
   	shr64_lo: shr64_lo_1
   };
 
-  function BlockHash() {
+  function BlockHash$1() {
     this.pending = null;
     this.pendingTotal = 0;
     this.blockSize = this.constructor.blockSize;
@@ -5870,9 +5867,9 @@
     this._delta8 = this.blockSize / 8;
     this._delta32 = this.blockSize / 32;
   }
-  var BlockHash_1 = BlockHash;
+  var BlockHash_1 = BlockHash$1;
 
-  BlockHash.prototype.update = function update(msg, enc) {
+  BlockHash$1.prototype.update = function update(msg, enc) {
     // Convert message to array, pad it, and join into 32bit blocks
     msg = utils.toArray(msg, enc);
     if (!this.pending)
@@ -5899,14 +5896,14 @@
     return this;
   };
 
-  BlockHash.prototype.digest = function digest(enc) {
+  BlockHash$1.prototype.digest = function digest(enc) {
     this.update(this._pad());
     minimalisticAssert(this.pending === null);
 
     return this._digest(enc);
   };
 
-  BlockHash.prototype._pad = function pad() {
+  BlockHash$1.prototype._pad = function pad() {
     var len = this.pendingTotal;
     var bytes = this._delta8;
     var k = bytes - ((len + this.padLength) % bytes);
@@ -5946,58 +5943,58 @@
     return res;
   };
 
-  var common = {
+  var common$1 = {
   	BlockHash: BlockHash_1
   };
 
-  var rotr32$1 = utils.rotr32;
+  var rotr32 = utils.rotr32;
 
   function ft_1(s, x, y, z) {
     if (s === 0)
-      return ch32(x, y, z);
+      return ch32$1(x, y, z);
     if (s === 1 || s === 3)
       return p32(x, y, z);
     if (s === 2)
-      return maj32(x, y, z);
+      return maj32$1(x, y, z);
   }
   var ft_1_1 = ft_1;
 
-  function ch32(x, y, z) {
+  function ch32$1(x, y, z) {
     return (x & y) ^ ((~x) & z);
   }
-  var ch32_1 = ch32;
+  var ch32_1 = ch32$1;
 
-  function maj32(x, y, z) {
+  function maj32$1(x, y, z) {
     return (x & y) ^ (x & z) ^ (y & z);
   }
-  var maj32_1 = maj32;
+  var maj32_1 = maj32$1;
 
   function p32(x, y, z) {
     return x ^ y ^ z;
   }
   var p32_1 = p32;
 
-  function s0_256(x) {
-    return rotr32$1(x, 2) ^ rotr32$1(x, 13) ^ rotr32$1(x, 22);
+  function s0_256$1(x) {
+    return rotr32(x, 2) ^ rotr32(x, 13) ^ rotr32(x, 22);
   }
-  var s0_256_1 = s0_256;
+  var s0_256_1 = s0_256$1;
 
-  function s1_256(x) {
-    return rotr32$1(x, 6) ^ rotr32$1(x, 11) ^ rotr32$1(x, 25);
+  function s1_256$1(x) {
+    return rotr32(x, 6) ^ rotr32(x, 11) ^ rotr32(x, 25);
   }
-  var s1_256_1 = s1_256;
+  var s1_256_1 = s1_256$1;
 
-  function g0_256(x) {
-    return rotr32$1(x, 7) ^ rotr32$1(x, 18) ^ (x >>> 3);
+  function g0_256$1(x) {
+    return rotr32(x, 7) ^ rotr32(x, 18) ^ (x >>> 3);
   }
-  var g0_256_1 = g0_256;
+  var g0_256_1 = g0_256$1;
 
-  function g1_256(x) {
-    return rotr32$1(x, 17) ^ rotr32$1(x, 19) ^ (x >>> 10);
+  function g1_256$1(x) {
+    return rotr32(x, 17) ^ rotr32(x, 19) ^ (x >>> 10);
   }
-  var g1_256_1 = g1_256;
+  var g1_256_1 = g1_256$1;
 
-  var common$1 = {
+  var common = {
   	ft_1: ft_1_1,
   	ch32: ch32_1,
   	maj32: maj32_1,
@@ -6008,17 +6005,17 @@
   	g1_256: g1_256_1
   };
 
-  var sum32$1 = utils.sum32;
-  var sum32_4$1 = utils.sum32_4;
-  var sum32_5$1 = utils.sum32_5;
-  var ch32$1 = common$1.ch32;
-  var maj32$1 = common$1.maj32;
-  var s0_256$1 = common$1.s0_256;
-  var s1_256$1 = common$1.s1_256;
-  var g0_256$1 = common$1.g0_256;
-  var g1_256$1 = common$1.g1_256;
+  var sum32 = utils.sum32;
+  var sum32_4 = utils.sum32_4;
+  var sum32_5 = utils.sum32_5;
+  var ch32 = common.ch32;
+  var maj32 = common.maj32;
+  var s0_256 = common.s0_256;
+  var s1_256 = common.s1_256;
+  var g0_256 = common.g0_256;
+  var g1_256 = common.g1_256;
 
-  var BlockHash$1 = common.BlockHash;
+  var BlockHash = common$1.BlockHash;
 
   var sha256_K = [
     0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
@@ -6043,7 +6040,7 @@
     if (!(this instanceof SHA256))
       return new SHA256();
 
-    BlockHash$1.call(this);
+    BlockHash.call(this);
     this.h = [
       0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
       0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
@@ -6051,7 +6048,7 @@
     this.k = sha256_K;
     this.W = new Array(64);
   }
-  utils.inherits(SHA256, BlockHash$1);
+  utils.inherits(SHA256, BlockHash);
   var _256 = SHA256;
 
   SHA256.blockSize = 512;
@@ -6065,7 +6062,7 @@
     for (var i = 0; i < 16; i++)
       W[i] = msg[start + i];
     for (; i < W.length; i++)
-      W[i] = sum32_4$1(g1_256$1(W[i - 2]), W[i - 7], g0_256$1(W[i - 15]), W[i - 16]);
+      W[i] = sum32_4(g1_256(W[i - 2]), W[i - 7], g0_256(W[i - 15]), W[i - 16]);
 
     var a = this.h[0];
     var b = this.h[1];
@@ -6078,26 +6075,26 @@
 
     minimalisticAssert(this.k.length === W.length);
     for (i = 0; i < W.length; i++) {
-      var T1 = sum32_5$1(h, s1_256$1(e), ch32$1(e, f, g), this.k[i], W[i]);
-      var T2 = sum32$1(s0_256$1(a), maj32$1(a, b, c));
+      var T1 = sum32_5(h, s1_256(e), ch32(e, f, g), this.k[i], W[i]);
+      var T2 = sum32(s0_256(a), maj32(a, b, c));
       h = g;
       g = f;
       f = e;
-      e = sum32$1(d, T1);
+      e = sum32(d, T1);
       d = c;
       c = b;
       b = a;
-      a = sum32$1(T1, T2);
+      a = sum32(T1, T2);
     }
 
-    this.h[0] = sum32$1(this.h[0], a);
-    this.h[1] = sum32$1(this.h[1], b);
-    this.h[2] = sum32$1(this.h[2], c);
-    this.h[3] = sum32$1(this.h[3], d);
-    this.h[4] = sum32$1(this.h[4], e);
-    this.h[5] = sum32$1(this.h[5], f);
-    this.h[6] = sum32$1(this.h[6], g);
-    this.h[7] = sum32$1(this.h[7], h);
+    this.h[0] = sum32(this.h[0], a);
+    this.h[1] = sum32(this.h[1], b);
+    this.h[2] = sum32(this.h[2], c);
+    this.h[3] = sum32(this.h[3], d);
+    this.h[4] = sum32(this.h[4], e);
+    this.h[5] = sum32(this.h[5], f);
+    this.h[6] = sum32(this.h[6], g);
+    this.h[7] = sum32(this.h[7], h);
   };
 
   SHA256.prototype._digest = function digest(enc) {
@@ -6114,5 +6111,5 @@
 
   Object.defineProperty(exports, '__esModule', { value: true });
 
-}));
+})));
 //# sourceMappingURL=mini-auth-v1.dev.js.map

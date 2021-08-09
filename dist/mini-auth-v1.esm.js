@@ -1,4 +1,4 @@
-import Promise from 'promise';
+import Promise$1 from 'promise';
 import { miniAuth } from 'miniapp-auth';
 
 var minimalisticAssert = assert;
@@ -18,22 +18,19 @@ function createCommonjsModule(fn, module) {
 }
 
 // shim for using process in browser
-if (typeof global.setTimeout === 'function') ;
-if (typeof global.clearTimeout === 'function') ;
 
 // from https://github.com/kumavis/browser-process-hrtime/blob/master/index.js
 var performance = global.performance || {};
-var performanceNow =
-  performance.now        ||
+performance.now        ||
   performance.mozNow     ||
   performance.msNow      ||
   performance.oNow       ||
   performance.webkitNow  ||
   function(){ return (new Date()).getTime() };
 
-var inherits;
+var inherits$1;
 if (typeof Object.create === 'function'){
-  inherits = function inherits(ctor, superCtor) {
+  inherits$1 = function inherits(ctor, superCtor) {
     // implementation from standard node.js 'util' module
     ctor.super_ = superCtor;
     ctor.prototype = Object.create(superCtor.prototype, {
@@ -46,7 +43,7 @@ if (typeof Object.create === 'function'){
     });
   };
 } else {
-  inherits = function inherits(ctor, superCtor) {
+  inherits$1 = function inherits(ctor, superCtor) {
     ctor.super_ = superCtor;
     var TempCtor = function () {};
     TempCtor.prototype = superCtor.prototype;
@@ -54,7 +51,7 @@ if (typeof Object.create === 'function'){
     ctor.prototype.constructor = ctor;
   };
 }
-var inherits$1 = inherits;
+var inherits$2 = inherits$1;
 
 // Copyright Joyent, Inc. and other Node contributors.
 var formatRegExp = /%[sdj%]/g;
@@ -125,7 +122,7 @@ var debugs = {};
 var debugEnviron;
 function debuglog(set) {
   if (isUndefined(debugEnviron))
-    debugEnviron =  '';
+    debugEnviron = '';
   set = set.toUpperCase();
   if (!debugs[set]) {
     if (new RegExp('\\b' + set + '\\b', 'i').test(debugEnviron)) {
@@ -580,7 +577,7 @@ function hasOwnProperty(obj, prop) {
 }
 
 var require$$0 = {
-  inherits: inherits$1,
+  inherits: inherits$2,
   _extend: _extend,
   log: log,
   isBuffer: isBuffer,
@@ -634,7 +631,7 @@ if (typeof Object.create === 'function') {
 }
 });
 
-var inherits$2 = createCommonjsModule(function (module) {
+var inherits = createCommonjsModule(function (module) {
 try {
   var util = require$$0;
   /* istanbul ignore next */
@@ -646,7 +643,7 @@ try {
 }
 });
 
-var inherits_1 = inherits$2;
+var inherits_1 = inherits;
 
 function isSurrogatePair(msg, i) {
   if ((msg.charCodeAt(i) & 0xFC00) !== 0xD800) {
@@ -798,35 +795,35 @@ function split32(msg, endian) {
 }
 var split32_1 = split32;
 
-function rotr32(w, b) {
+function rotr32$1(w, b) {
   return (w >>> b) | (w << (32 - b));
 }
-var rotr32_1 = rotr32;
+var rotr32_1 = rotr32$1;
 
 function rotl32(w, b) {
   return (w << b) | (w >>> (32 - b));
 }
 var rotl32_1 = rotl32;
 
-function sum32(a, b) {
+function sum32$1(a, b) {
   return (a + b) >>> 0;
 }
-var sum32_1 = sum32;
+var sum32_1 = sum32$1;
 
 function sum32_3(a, b, c) {
   return (a + b + c) >>> 0;
 }
 var sum32_3_1 = sum32_3;
 
-function sum32_4(a, b, c, d) {
+function sum32_4$1(a, b, c, d) {
   return (a + b + c + d) >>> 0;
 }
-var sum32_4_1 = sum32_4;
+var sum32_4_1 = sum32_4$1;
 
-function sum32_5(a, b, c, d, e) {
+function sum32_5$1(a, b, c, d, e) {
   return (a + b + c + d + e) >>> 0;
 }
-var sum32_5_1 = sum32_5;
+var sum32_5_1 = sum32_5$1;
 
 function sum64(buf, pos, ah, al) {
   var bh = buf[pos];
@@ -949,7 +946,7 @@ var utils = {
 	shr64_lo: shr64_lo_1
 };
 
-function BlockHash() {
+function BlockHash$1() {
   this.pending = null;
   this.pendingTotal = 0;
   this.blockSize = this.constructor.blockSize;
@@ -961,9 +958,9 @@ function BlockHash() {
   this._delta8 = this.blockSize / 8;
   this._delta32 = this.blockSize / 32;
 }
-var BlockHash_1 = BlockHash;
+var BlockHash_1 = BlockHash$1;
 
-BlockHash.prototype.update = function update(msg, enc) {
+BlockHash$1.prototype.update = function update(msg, enc) {
   // Convert message to array, pad it, and join into 32bit blocks
   msg = utils.toArray(msg, enc);
   if (!this.pending)
@@ -990,14 +987,14 @@ BlockHash.prototype.update = function update(msg, enc) {
   return this;
 };
 
-BlockHash.prototype.digest = function digest(enc) {
+BlockHash$1.prototype.digest = function digest(enc) {
   this.update(this._pad());
   minimalisticAssert(this.pending === null);
 
   return this._digest(enc);
 };
 
-BlockHash.prototype._pad = function pad() {
+BlockHash$1.prototype._pad = function pad() {
   var len = this.pendingTotal;
   var bytes = this._delta8;
   var k = bytes - ((len + this.padLength) % bytes);
@@ -1037,58 +1034,58 @@ BlockHash.prototype._pad = function pad() {
   return res;
 };
 
-var common = {
+var common$1 = {
 	BlockHash: BlockHash_1
 };
 
-var rotr32$1 = utils.rotr32;
+var rotr32 = utils.rotr32;
 
 function ft_1(s, x, y, z) {
   if (s === 0)
-    return ch32(x, y, z);
+    return ch32$1(x, y, z);
   if (s === 1 || s === 3)
     return p32(x, y, z);
   if (s === 2)
-    return maj32(x, y, z);
+    return maj32$1(x, y, z);
 }
 var ft_1_1 = ft_1;
 
-function ch32(x, y, z) {
+function ch32$1(x, y, z) {
   return (x & y) ^ ((~x) & z);
 }
-var ch32_1 = ch32;
+var ch32_1 = ch32$1;
 
-function maj32(x, y, z) {
+function maj32$1(x, y, z) {
   return (x & y) ^ (x & z) ^ (y & z);
 }
-var maj32_1 = maj32;
+var maj32_1 = maj32$1;
 
 function p32(x, y, z) {
   return x ^ y ^ z;
 }
 var p32_1 = p32;
 
-function s0_256(x) {
-  return rotr32$1(x, 2) ^ rotr32$1(x, 13) ^ rotr32$1(x, 22);
+function s0_256$1(x) {
+  return rotr32(x, 2) ^ rotr32(x, 13) ^ rotr32(x, 22);
 }
-var s0_256_1 = s0_256;
+var s0_256_1 = s0_256$1;
 
-function s1_256(x) {
-  return rotr32$1(x, 6) ^ rotr32$1(x, 11) ^ rotr32$1(x, 25);
+function s1_256$1(x) {
+  return rotr32(x, 6) ^ rotr32(x, 11) ^ rotr32(x, 25);
 }
-var s1_256_1 = s1_256;
+var s1_256_1 = s1_256$1;
 
-function g0_256(x) {
-  return rotr32$1(x, 7) ^ rotr32$1(x, 18) ^ (x >>> 3);
+function g0_256$1(x) {
+  return rotr32(x, 7) ^ rotr32(x, 18) ^ (x >>> 3);
 }
-var g0_256_1 = g0_256;
+var g0_256_1 = g0_256$1;
 
-function g1_256(x) {
-  return rotr32$1(x, 17) ^ rotr32$1(x, 19) ^ (x >>> 10);
+function g1_256$1(x) {
+  return rotr32(x, 17) ^ rotr32(x, 19) ^ (x >>> 10);
 }
-var g1_256_1 = g1_256;
+var g1_256_1 = g1_256$1;
 
-var common$1 = {
+var common = {
 	ft_1: ft_1_1,
 	ch32: ch32_1,
 	maj32: maj32_1,
@@ -1099,17 +1096,17 @@ var common$1 = {
 	g1_256: g1_256_1
 };
 
-var sum32$1 = utils.sum32;
-var sum32_4$1 = utils.sum32_4;
-var sum32_5$1 = utils.sum32_5;
-var ch32$1 = common$1.ch32;
-var maj32$1 = common$1.maj32;
-var s0_256$1 = common$1.s0_256;
-var s1_256$1 = common$1.s1_256;
-var g0_256$1 = common$1.g0_256;
-var g1_256$1 = common$1.g1_256;
+var sum32 = utils.sum32;
+var sum32_4 = utils.sum32_4;
+var sum32_5 = utils.sum32_5;
+var ch32 = common.ch32;
+var maj32 = common.maj32;
+var s0_256 = common.s0_256;
+var s1_256 = common.s1_256;
+var g0_256 = common.g0_256;
+var g1_256 = common.g1_256;
 
-var BlockHash$1 = common.BlockHash;
+var BlockHash = common$1.BlockHash;
 
 var sha256_K = [
   0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5,
@@ -1134,7 +1131,7 @@ function SHA256() {
   if (!(this instanceof SHA256))
     return new SHA256();
 
-  BlockHash$1.call(this);
+  BlockHash.call(this);
   this.h = [
     0x6a09e667, 0xbb67ae85, 0x3c6ef372, 0xa54ff53a,
     0x510e527f, 0x9b05688c, 0x1f83d9ab, 0x5be0cd19
@@ -1142,7 +1139,7 @@ function SHA256() {
   this.k = sha256_K;
   this.W = new Array(64);
 }
-utils.inherits(SHA256, BlockHash$1);
+utils.inherits(SHA256, BlockHash);
 var _256 = SHA256;
 
 SHA256.blockSize = 512;
@@ -1156,7 +1153,7 @@ SHA256.prototype._update = function _update(msg, start) {
   for (var i = 0; i < 16; i++)
     W[i] = msg[start + i];
   for (; i < W.length; i++)
-    W[i] = sum32_4$1(g1_256$1(W[i - 2]), W[i - 7], g0_256$1(W[i - 15]), W[i - 16]);
+    W[i] = sum32_4(g1_256(W[i - 2]), W[i - 7], g0_256(W[i - 15]), W[i - 16]);
 
   var a = this.h[0];
   var b = this.h[1];
@@ -1169,26 +1166,26 @@ SHA256.prototype._update = function _update(msg, start) {
 
   minimalisticAssert(this.k.length === W.length);
   for (i = 0; i < W.length; i++) {
-    var T1 = sum32_5$1(h, s1_256$1(e), ch32$1(e, f, g), this.k[i], W[i]);
-    var T2 = sum32$1(s0_256$1(a), maj32$1(a, b, c));
+    var T1 = sum32_5(h, s1_256(e), ch32(e, f, g), this.k[i], W[i]);
+    var T2 = sum32(s0_256(a), maj32(a, b, c));
     h = g;
     g = f;
     f = e;
-    e = sum32$1(d, T1);
+    e = sum32(d, T1);
     d = c;
     c = b;
     b = a;
-    a = sum32$1(T1, T2);
+    a = sum32(T1, T2);
   }
 
-  this.h[0] = sum32$1(this.h[0], a);
-  this.h[1] = sum32$1(this.h[1], b);
-  this.h[2] = sum32$1(this.h[2], c);
-  this.h[3] = sum32$1(this.h[3], d);
-  this.h[4] = sum32$1(this.h[4], e);
-  this.h[5] = sum32$1(this.h[5], f);
-  this.h[6] = sum32$1(this.h[6], g);
-  this.h[7] = sum32$1(this.h[7], h);
+  this.h[0] = sum32(this.h[0], a);
+  this.h[1] = sum32(this.h[1], b);
+  this.h[2] = sum32(this.h[2], c);
+  this.h[3] = sum32(this.h[3], d);
+  this.h[4] = sum32(this.h[4], e);
+  this.h[5] = sum32(this.h[5], f);
+  this.h[6] = sum32(this.h[6], g);
+  this.h[7] = sum32(this.h[7], h);
 };
 
 SHA256.prototype._digest = function digest(enc) {
@@ -1198,7 +1195,7 @@ SHA256.prototype._digest = function digest(enc) {
     return utils.split32(this.h, 'big');
 };
 
-var auth=null;function creatMiniAuth(){var _ref=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{env:"weapp"},appid=_ref.appid,env=_ref.env,url=_ref.url,appKey=_ref.appKey,appCode=_ref.appCode,headers=_ref.headers;if(auth)return auth;var tokenReqConfig={url:url,method:"POST",headers:headers};return auth=miniAuth.create({appid:appid,env:env,tokenReqConfig:tokenReqConfig}),auth.use("token",function(ctx,next){var jsCode=ctx.tokenReqData.jsCode;jsCode&&("undefined"!=typeof wx&&wx&&(ctx.tokenReqData={js_code:jsCode}),"undefined"!=typeof my&&my&&(ctx.tokenReqData={auth_code:jsCode}),!tokenReqConfig.headers&&(tokenReqConfig.headers={}),tokenReqConfig.headers["Authorization-AppKey"]=appKey,tokenReqConfig.headers["Authorization-Sign"]=_256().update("".concat(appKey).concat(JSON.stringify(ctx.tokenReqData)).concat(appCode)).digest("hex"),auth.setTokenReqConfig("headers",tokenReqConfig.headers)),next();}),auth.use("afterToken",function(ctx,next){var _ctx$tokenResData$dat=ctx.tokenResData.data,_ctx$tokenResData$dat2=_ctx$tokenResData$dat.data,data=void 0===_ctx$tokenResData$dat2?{}:_ctx$tokenResData$dat2,retcode=_ctx$tokenResData$dat.retcode,msg=_ctx$tokenResData$dat.msg,code=_ctx$tokenResData$dat.code;if(200===retcode||200===code)return ctx.tokenResData=data,next();var headersObj={},statusCode=5e4,errMsg="UNKOWN";try{headersObj=ctx.tokenResData.headers,statusCode=ctx.tokenResData.status,errMsg=msg||ctx.tokenResData.data;}catch(e){console.error(e);}return next({headers:headersObj,status:statusCode,retcode:retcode||code,msg:errMsg,data:data})}),auth.setTokenExpires(1e3*3600),auth}function getToken(){var opts=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{};return new Promise(function(resolve,reject){function selfGetToken(retry){auth.getToken(opts).then(function(res){resolve(res);})["catch"](function(err){5001===err.errCode||5002===err.errCode?retry>=3?reject(err):setTimeout(function(){selfGetToken(retry+1);},2e3):reject(err);});}selfGetToken(0);})}
+var auth=null;function creatMiniAuth(){var _ref=0<arguments.length&&void 0!==arguments[0]?arguments[0]:{env:"weapp"},appid=_ref.appid,env=_ref.env,url=_ref.url,appKey=_ref.appKey,appCode=_ref.appCode,headers=_ref.headers;if(auth)return auth;var tokenReqConfig={url:url,method:"POST",headers:headers};return auth=miniAuth.create({appid:appid,env:env,tokenReqConfig:tokenReqConfig}),auth.use("token",function(ctx,next){var jsCode=ctx.tokenReqData.jsCode;jsCode&&("undefined"!=typeof wx&&wx&&(ctx.tokenReqData={js_code:jsCode}),"undefined"!=typeof my&&my&&(ctx.tokenReqData={auth_code:jsCode}),!tokenReqConfig.headers&&(tokenReqConfig.headers={}),tokenReqConfig.headers["Authorization-AppKey"]=appKey,tokenReqConfig.headers["Authorization-Sign"]=_256().update("".concat(appKey).concat(JSON.stringify(ctx.tokenReqData)).concat(appCode)).digest("hex"),auth.setTokenReqConfig("headers",tokenReqConfig.headers)),next();}),auth.use("afterToken",function(ctx,next){var _ctx$tokenResData$dat=ctx.tokenResData.data,_ctx$tokenResData$dat2=_ctx$tokenResData$dat.data,data=void 0===_ctx$tokenResData$dat2?{}:_ctx$tokenResData$dat2,retcode=_ctx$tokenResData$dat.retcode,msg=_ctx$tokenResData$dat.msg,code=_ctx$tokenResData$dat.code;if(200===retcode||200===code)return ctx.tokenResData=data,next();var headersObj={},statusCode=5e4,errMsg="UNKOWN";try{headersObj=ctx.tokenResData.headers,statusCode=ctx.tokenResData.status,errMsg=msg||ctx.tokenResData.data;}catch(e){console.error(e);}return next({headers:headersObj,status:statusCode,retcode:retcode||code,msg:errMsg,data:data})}),auth.setTokenExpires(1e3*3600),auth}function getToken(){var opts=0<arguments.length&&arguments[0]!==void 0?arguments[0]:{};return new Promise$1(function(resolve,reject){function selfGetToken(retry){auth.getToken(opts).then(function(res){resolve(res);})["catch"](function(err){5001===err.errCode||5002===err.errCode?retry>=3?reject(err):setTimeout(function(){selfGetToken(retry+1);},2e3):reject(err);});}selfGetToken(0);})}
 
 export { creatMiniAuth, getToken };
 //# sourceMappingURL=mini-auth-v1.esm.js.map

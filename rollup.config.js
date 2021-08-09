@@ -27,6 +27,7 @@ export default {
       sourcemap: true,
       strict: true,
       noConflict: true,
+      plugins: [terser()],
     },
     // 使用es6 import语法
     {
@@ -46,9 +47,6 @@ export default {
       exclude: 'node_modules/**',
     }),
     commonjs(),
-    terser({
-      include: [/^.+\.common\.js$/],
-    }),
   ],
   watch: {
     clearScreen: true,
