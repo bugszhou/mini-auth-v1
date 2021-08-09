@@ -1,3 +1,12 @@
+# [4.3.0](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.8...v4.3.0) (2021-08-09)
+
+
+### Features
+
+* 设置缓存时间为3600s ([3c3e0d7](https://github.com/bugszhou/mini-auth-v1/commit/3c3e0d79129aac9beb8d5c657e4cf754bfc26902))
+
+
+
 ## [4.2.8](https://github.com/bugszhou/mini-auth-v1/compare/v4.2.7...v4.2.8) (2021-07-14)
 
 
