@@ -76,6 +76,8 @@ export function creatMiniAuth(
     });
   });
 
+  auth.setTokenExpires(3600 * 1000);
+
   return auth;
 }
 
