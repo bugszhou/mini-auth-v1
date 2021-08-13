@@ -1,3 +1,12 @@
+## [4.3.5](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.3...v4.3.5) (2021-08-13)
+
+
+### Features
+
+* 增加code重命名 ([ef51918](https://github.com/bugszhou/mini-auth-v1/commit/ef51918a733121c91bb11874c4b2c19c0e172677))
+
+
+
 ## [4.3.3](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.2...v4.3.3) (2021-08-13)
 
 
