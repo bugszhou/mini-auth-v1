@@ -1,3 +1,12 @@
+## [4.3.3](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.2...v4.3.3) (2021-08-13)
+
+
+### Features
+
+* 增加types ([2cd5378](https://github.com/bugszhou/mini-auth-v1/commit/2cd5378dfd36e9f79ca20569171c7d04b4bff605))
+
+
+
 ## [4.3.2](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.1...v4.3.2) (2021-08-13)
 
 
