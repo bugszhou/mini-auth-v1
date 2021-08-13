@@ -22,6 +22,11 @@ declare class MiniAuth<IData extends {}> {
    * @param opts - object
    */
   getToken(opts?: IMiniAuthGetTokenOptions): Promise<IGetTokenReturn<IData>>;
+  /**
+   * 修改中间件
+   * @param opts - object
+   */
+  use(eventName: string, middleware: (ctx: any, next: any) => void): void;
 }
 
 interface IMiniAuthOptions {
