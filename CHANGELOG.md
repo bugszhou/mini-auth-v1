@@ -1,3 +1,12 @@
+## [4.3.2](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.1...v4.3.2) (2021-08-13)
+
+
+### Features
+
+* 增加是否使用默认中间件功能 ([900650f](https://github.com/bugszhou/mini-auth-v1/commit/900650fac5deb25feb2635a998bcd68cb9fd4e72))
+
+
+
 ## [4.3.1](https://github.com/bugszhou/mini-auth-v1/compare/v4.3.0...v4.3.1) (2021-08-13)
 
 

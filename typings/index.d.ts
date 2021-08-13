@@ -58,6 +58,8 @@ interface IMiniAuthOptions {
   headers?: {
     [key: string]: string;
   };
+
+  [key: string]: any;
 }
 
 interface IMiniAuthGetTokenOptions {
