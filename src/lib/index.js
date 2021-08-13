@@ -8,7 +8,7 @@ let auth = null;
 
 export function creatMiniAuth(
   // eslint-disable-next-line object-curly-newline
-  { appid, env, url, appKey, appCode, headers } = { env: "weapp" },
+  { appid, env, url, appKey, appCode, headers, useDefault } = { env: "weapp", useDefault: true },
 ) {
   if (auth) {
     return auth;
@@ -26,30 +26,32 @@ export function creatMiniAuth(
     tokenReqConfig,
   });
 
-  auth.use("token", (ctx, next) => {
-    const { jsCode } = ctx.tokenReqData;
-    if (jsCode) {
-      if (typeof wx !== "undefined" && wx) {
-        ctx.tokenReqData = {
-          js_code: jsCode,
-        };
+  if (useDefault !== false) {
+    auth.use("token", (ctx, next) => {
+      const { jsCode } = ctx.tokenReqData;
+      if (jsCode) {
+        if (typeof wx !== "undefined" && wx) {
+          ctx.tokenReqData = {
+            js_code: jsCode,
+          };
+        }
+        if (typeof my !== "undefined" && my) {
+          ctx.tokenReqData = {
+            auth_code: jsCode,
+          };
+        }
+        if (!tokenReqConfig.headers) {
+          tokenReqConfig.headers = {};
+        }
+        tokenReqConfig.headers["Authorization-AppKey"] = appKey;
+        tokenReqConfig.headers["Authorization-Sign"] = sha256()
+          .update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`)
+          .digest("hex");
+        auth.setTokenReqConfig("headers", tokenReqConfig.headers);
       }
-      if (typeof my !== "undefined" && my) {
-        ctx.tokenReqData = {
-          auth_code: jsCode,
-        };
-      }
-      if (!tokenReqConfig.headers) {
-        tokenReqConfig.headers = {};
-      }
-      tokenReqConfig.headers["Authorization-AppKey"] = appKey;
-      tokenReqConfig.headers["Authorization-Sign"] = sha256()
-        .update(`${appKey}${JSON.stringify(ctx.tokenReqData)}${appCode}`)
-        .digest("hex");
-      auth.setTokenReqConfig("headers", tokenReqConfig.headers);
-    }
-    next();
-  });
+      next();
+    });
+  }
   auth.use("afterToken", (ctx, next) => {
     // eslint-disable-next-line object-curly-newline
     const { data = {}, retcode, msg, code } = ctx.tokenResData.data;
