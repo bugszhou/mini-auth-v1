@@ -33,7 +33,10 @@ export function creatMiniAuth(
         ctx.tokenReqData = {
           js_code: jsCode,
         };
-        ctx.tokenReqData[codeKey] = jsCode;
+
+        if (codeKey) {
+          ctx.tokenReqData[codeKey] = jsCode;
+        }
       }
       if (typeof my !== "undefined" && my) {
         ctx.tokenReqData = {
