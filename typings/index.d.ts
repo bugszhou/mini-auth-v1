@@ -100,6 +100,12 @@ interface IGetTokenReturn<IReturnData> {
 }
 
 declare module "mini-auth-v1" {
+  export function createMiniAuth<IReturnData>(
+    options: IMiniAuthOptions,
+  ): MiniAuth<IReturnData>;
+  /**
+   * 兼容typo的类型推断，在下个大版本号更新后可去除
+   */
   export function creatMiniAuth<IReturnData>(
     options: IMiniAuthOptions,
   ): MiniAuth<IReturnData>;
